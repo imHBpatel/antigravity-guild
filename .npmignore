@@ -1,0 +1,11 @@
+# Development files
+.github/
+CONTRIBUTING.md
+CHANGELOG.md
+.gitignore
+
+# Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo

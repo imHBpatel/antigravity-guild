@@ -1,0 +1,15 @@
+
+# === OpenGuild Context Hygiene ===
+node_modules/
+.venv/
+venv/
+__pycache__/
+dist/
+build/
+target/
+.next/
+*.log
+.env
+.env.*
+*.key
+*.pem

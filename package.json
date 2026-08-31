@@ -1,0 +1,44 @@
+{
+  "name": "antigravity-guild",
+  "version": "1.0.0",
+  "description": "Zero-config persistent memory and multi-role AI expert guild for Antigravity IDE, Cursor, and Claude. One command to give your AI the engineering standards of Google, Apple, and Anthropic.",
+  "main": "bin/cli.js",
+  "bin": {
+    "antigravity-guild": "./bin/cli.js",
+    "openguild": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node bin/cli.js --help && node bin/cli.js --version"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imHBpatel/antigravity-guild.git"
+  },
+  "homepage": "https://github.com/imHBpatel/antigravity-guild#readme",
+  "bugs": {
+    "url": "https://github.com/imHBpatel/antigravity-guild/issues"
+  },
+  "keywords": [
+    "antigravity",
+    "ai-agent",
+    "gemini",
+    "cursor",
+    "claude",
+    "multi-agent",
+    "memory",
+    "developer-tools",
+    "code-quality",
+    "ai-engineering"
+  ],
+  "author": "Hardik Patel",
+  "license": "MIT"
+}
