@@ -1,20 +1,21 @@
 {
   "name": "antigravity-guild",
-  "version": "1.0.0",
-  "description": "Zero-config persistent memory and multi-role AI expert guild for Antigravity IDE, Cursor, and Claude. One command to give your AI the engineering standards of Google, Apple, and Anthropic.",
+  "version": "2.2.0",
+  "description": "Zero-config persistent memory, 12-expert AI council, domain presets, 1-click MCP setup, and team memory for Antigravity IDE, Cursor, Gemini, and Claude.",
   "main": "bin/cli.js",
   "bin": {
-    "antigravity-guild": "./bin/cli.js",
-    "openguild": "./bin/cli.js"
+    "antigravity-guild": "bin/cli.js",
+    "openguild": "bin/cli.js"
   },
   "files": [
     "bin/",
+    "lib/",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "start": "node bin/cli.js",
-    "test": "node bin/cli.js --help && node bin/cli.js --version"
+    "test": "node tests/detectors.test.js && node tests/generator.test.js && node tests/cli.test.js && node tests/mcp.test.js && node tests/sync.test.js && node tests/editor_config.test.js && node tests/memory_linter.test.js && node tests/team_memory.test.js"
   },
   "engines": {
     "node": ">=16.0.0"
@@ -30,11 +31,15 @@
   "keywords": [
     "antigravity",
     "ai-agent",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
     "gemini",
     "cursor",
     "claude",
     "multi-agent",
     "memory",
+    "team-memory",
     "developer-tools",
     "code-quality",
     "ai-engineering"
