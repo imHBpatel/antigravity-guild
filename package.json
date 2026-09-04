@@ -1,7 +1,7 @@
 {
   "name": "antigravity-guild",
-  "version": "2.2.0",
-  "description": "Zero-config persistent memory, 12-expert AI council, domain presets, 1-click MCP setup, and team memory for Antigravity IDE, Cursor, Gemini, and Claude.",
+  "version": "2.5.0",
+  "description": "Zero-config persistent memory, 16-Mind Supreme AGI Council, autonomous auto-analyst, learning engine, and team memory for Antigravity IDE, Cursor, Gemini, and Claude.",
   "main": "bin/cli.js",
   "bin": {
     "antigravity-guild": "bin/cli.js",
@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "start": "node bin/cli.js",
-    "test": "node tests/detectors.test.js && node tests/generator.test.js && node tests/cli.test.js && node tests/mcp.test.js && node tests/sync.test.js && node tests/editor_config.test.js && node tests/memory_linter.test.js && node tests/team_memory.test.js"
+    "test": "node tests/detectors.test.js && node tests/generator.test.js && node tests/cli.test.js && node tests/mcp.test.js && node tests/sync.test.js && node tests/editor_config.test.js && node tests/memory_linter.test.js && node tests/team_memory.test.js && node tests/learn.test.js && node tests/ci.test.js && node tests/analyzer.test.js && node tests/token_profiler.test.js && node tests/verifier.test.js && node tests/security_auditor.test.js"
   },
   "engines": {
     "node": ">=16.0.0"

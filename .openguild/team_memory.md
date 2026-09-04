@@ -1,0 +1,2 @@
+- [2026-09-04] **[SECURITY]** Always validate JWT signatures using asymmetric RS256 with key rotation
+- [2026-09-04] **[SECURITY]** Set secret webhook bearer token [REDACTED_SECRET]

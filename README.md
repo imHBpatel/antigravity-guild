@@ -1,148 +1,301 @@
-# ⚡ OpenGuild (`antigravity-guild`) v2.2.0
+# ⚡ OpenGuild (`antigravity-guild`)
 
-**Zero-config persistent memory, 12-Expert AI Council, Domain Presets, 1-Click MCP Editor Setup, and Team-Synced Memory for Antigravity IDE, Cursor, Gemini, and Claude.**
+> **Turn your AI coding assistant into a 16-person staff engineering team that never forgets a bug, never leaks a secret, and saves thousands of tokens on every chat turn.**
 
-Run one command. Give your AI coding assistant the engineering standards of Google, Apple, and Anthropic — across every project, language, monorepo, and editor.
+[![Version](https://img.shields.io/badge/version-2.5.0-blue.svg?style=flat-square)](package.json)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
+
+Run one command in any project:
 
 ```bash
 npx antigravity-guild
 ```
 *(or `npx openguild`)*
 
----
-
-## 💡 The Prompt Playbook (How Anyone Can Build World-Class Software)
-
-Once you run OpenGuild, you don't need complex prompt engineering. Use these **5 copy-paste prompts** in **Antigravity IDE**, **Cursor**, **Gemini**, or **Claude**:
-
-### 1. 🏗️ Architecture & System Design (Before writing code)
-> *"I want to build [Feature Description]. Before writing code, have the 12-Expert Council design the data model, API contracts, and security boundaries."*
-
-### 2. 🎨 Apple-Grade UI/UX & Polish
-> *"Review this screen through the lens of the Apple CTO and UI/UX Lead. Make typography, responsive layout, spacing, and micro-interactions feel clean, accessible, and intuitive."*
-
-### 3. 🛡️ Security & Bug Audit (Before deploying)
-> *"Act as the Chief Security Officer and QA Lead. Audit this code for hidden bugs, unhandled null checks, secret leakage, or input vulnerabilities."*
-
-### 4. ⚡ Performance & Database Optimization
-> *"Have the Performance Specialist and Database Reliability Engineer review our queries, caching, and state management for performance bottlenecks or slow queries."*
-
-### 5. 🧪 Deterministic Verification Proof
-> *"Run our automated test suite and typechecks. Do not mark this task as complete until all tests pass with zero errors."*
+Works out-of-the-box with **Antigravity IDE**, **Cursor**, **Claude Desktop**, **VS Code**, **Windsurf**, and **Gemini**.
 
 ---
 
-## 🌟 What's New in v2.2.0
+## 😫 The Problem with AI Assistants Today
 
-- 👥 **Team-Synced Workspace Memory (`--team`)**: Initializes a Git-versioned `.openguild/` directory with `team_memory.md` and `architecture_decisions.md` so the entire engineering team shares context automatically.
-- ⚡ **1-Click MCP Editor Configurator (`--setup-mcp [editor]`)**: Instantly detects and injects the OpenGuild MCP server into **Claude Desktop**, **Cursor IDE**, and **Antigravity** config files without manual JSON editing.
-- 🧹 **Memory Vault Linter & Auto-Cleaner (`--lint-memory [--fix]`)**: Scans and deduplicates memory bullet points, removes stale rules, and optimizes context size.
-- 🏛️ **12-Expert Council Architecture**: Features Architect, UI/UX, Security, Staff Eng, QA, DevOps, Google CTO, Apple CTO, Anthropic Safety, Performance Specialist, Database Reliability Engineer, and Product Strategy Lead.
-- 🎯 **Domain Preset Engine (`--preset <name>`)**: Instantly tailor your AI Council's focus (`full`, `backend`, `web`, `mobile`, `ai-ml`).
+If you use Cursor, Claude, or Antigravity to write code every day, you know these frustrations:
+
+1. **AI Amnesia:** You spend 30 minutes teaching your AI not to use `any` in TypeScript or how your auth middleware works. The next day, in a new chat, it makes the exact same mistake.
+2. **Context Bloat & Sluggish Responses:** Huge system prompts burn 4,000+ tokens before you even type your prompt. Responses feel slow, cost real API dollars, and the AI suffers from *attention drift*.
+3. **Shallow, Junior Code:** Most AI code works for a demo, but collapses in production: missing null checks, zero error handling, unparameterized SQL queries, and sloppy architecture.
+4. **Zero Team Alignment:** Everyone on your team prompts their AI differently, resulting in mismatched styles, broken conventions, and conflicting PRs.
+
+### ✨ How OpenGuild Fixes This
+
+| Without OpenGuild | With OpenGuild v2.5.0 |
+|:---|:---|
+| AI forgets project lessons every time you open a new chat | **Cross-project memory vault** remembers every architectural rule and bugfix forever |
+| 4,500+ tokens burned on monolithic rules per turn | **Lean 770-token base contract** (80-85% token diet) with instant sub-second streaming |
+| AI generates naive code without thinking about edge cases | **16-Mind Council** applies Google scalability, Apple UX aesthetics, and Anthropic safety |
+| AI commits broken code and forgets tests | **Deterministic Verification Gate** blocks completion until tests and linters pass |
+| Secrets, API keys, and raw `eval()` leak into code | **Built-in SAIF 2.0 Security Auditor** catches credentials and hazards before you commit |
 
 ---
 
-## 🚀 Quick Start
+## ⚡ Quick Start in 60 Seconds
 
-### 1. Configure any workspace
+You don't need to install anything globally or create an account. OpenGuild runs directly via `npx` with **zero external dependencies**.
+
+### Step 1: Initialize your project
+Open your terminal, navigate to your project, and run:
+
 ```bash
-cd your-project
-
-# Standard setup
+cd your-awesome-project
 npx antigravity-guild
-
-# With domain preset (e.g. backend)
-npx antigravity-guild --preset backend
-
-# Initialize Git-shared team memory
-npx antigravity-guild --team
 ```
 
-### 2. 1-Click Connect Your AI Editors
+OpenGuild automatically detects your stack (Next.js, FastAPI, Rust Axum, Go, Flutter, etc.) and synthesizes non-destructive rule contracts:
+- `AGENTS.md` (Universal Agent standard)
+- `.cursorrules` (Cursor IDE)
+- `.gemini/rules.md` (Antigravity & Gemini)
+- `~/.openguild/memory` (Your global, cross-project memory vault)
+
+---
+
+### Step 2: Connect your AI editor (1-Click)
+Run this command to automatically register OpenGuild's native MCP server in your editor's configuration:
+
 ```bash
-# Auto-configure Claude Desktop, Cursor, and Antigravity
+# Auto-configures Cursor, Claude Desktop, and Antigravity IDE
 npx antigravity-guild --setup-mcp all
 ```
 
-### 3. Inspect your memory vault & Council status
+*Prefer a specific editor? Use `npx antigravity-guild --setup-mcp cursor` or `claude`.*
+
+---
+
+### Step 3: Chat with your AI normally
+Open your editor and prompt your assistant. You will instantly notice the difference. Your AI now has deep memory, high standards, and 10 real-time tools.
+
+---
+
+## 🛠️ The 6 Core Superpowers
+
+### 1. 🧠 Persistent Memory That Actually Learns
+Never repeat yourself to an AI again. Whenever you solve a tricky bug or decide on an architectural rule, teach OpenGuild:
+
 ```bash
-npx antigravity-guild --status
+# Save an insight to your global memory (available across all your projects)
+npx antigravity-guild --learn "Always set Content-Type header on custom fetch calls" --category architecture
+
+# Or teach it directly inside your chat with Cursor or Claude:
+# "Remember: We always use zod to parse inbound request bodies in this project."
+```
+
+OpenGuild automatically scrubs API keys and secrets before saving, indexes the lesson with tags, and deduplicates redundant rules.
+
+---
+
+### 2. ⚡ Context Diet & Token Profiler (`--tokens`)
+Monolithic prompts slow down your AI and cost money. OpenGuild keeps base instructions razor-thin (~770 tokens) and pulls deep knowledge only when needed via MCP tools.
+
+Run the profiler anytime to see your token weight and savings:
+
+```bash
+npx antigravity-guild --tokens
+```
+
+**Example Output:**
+```text
+# ⚡ OpenGuild Token & Context Diet Report
+Efficiency Grade: A+ (🟢 Highly Optimized)
+  Active Context Token Load:  771 tokens
+  Standard Monolithic Prompt: 4,500 tokens
+  Context Diet Savings:       83% reduction (~3,729 tokens saved/turn)
+  Estimated Cost Savings:     ~$11.19 per 1,000 chat turns
+```
+
+---
+
+### 3. 🔮 Autonomous Auto-Analyst (`--analyze`)
+Have a rough idea but aren't sure how to architect it? The Auto-Analyst turns raw concepts into full production-grade blueprints in seconds:
+
+```bash
+npx antigravity-guild --analyze "A self-hosted bookmark manager with AI auto-tagging and offline search"
+```
+
+**What it generates:**
+- Inferred problem domain and target personas
+- Latent edge cases and failure modes you didn't think of
+- Recommended tech stack (Frontend, Backend, Database, AI models)
+- Apple-grade UI/UX specifications and micro-interactions
+- Security guardrails and deterministic test contracts
+
+---
+
+### 4. 🧪 Deterministic Verification Gate (`--verify`)
+Stop trusting an AI that says *"Everything is done and working!"* when tests are failing. Run OpenGuild's unified invariant gate:
+
+```bash
+# Verify tests, linter, types, memory integrity, and git hygiene in one command
+npx antigravity-guild --verify
+
+# Auto-fix memory duplicates and missing .gitignore rules
+npx antigravity-guild --verify --fix
+```
+
+It executes your project's native test commands (`npm test`, `pytest`, `cargo test`, `go test`) and outputs a certified invariant proof.
+
+---
+
+### 5. 🛡️ Deep Security & SAIF 2.0 Codebase Auditor (`--audit`)
+Scan your repository for secret leaks, hardcoded credentials, and high-risk code patterns before pushing to production:
+
+```bash
+npx antigravity-guild --audit
+```
+
+**What it catches:**
+- Plaintext API keys, AWS credentials, GitHub tokens, and private keys
+- Uncommitted sensitive `.env` files
+- Dynamic SQL string concatenation (SQL injection hazards)
+- Arbitrary code execution hazards (`eval()`)
+
+Assigns an institutional grade (**A+ to F**) with exact filenames, line numbers, and fix instructions.
+
+---
+
+### 6. 👥 Git-Shared Team Memory (`--team`)
+Ensure every developer on your team gets the exact same high-quality AI output:
+
+```bash
+npx antigravity-guild --team
+```
+
+Creates a version-controlled `.openguild/` folder containing `team_memory.md` and `architecture_decisions.md`. When teammates pull the repo, their AI assistants automatically inherit all team decisions.
+
+---
+
+## 💡 The Prompt Playbook (Copy & Paste Into Your Chat)
+
+Once OpenGuild is set up, you don't need complex prompting. Copy and paste these **battle-tested prompts** into Cursor, Claude, or Antigravity:
+
+### 🚀 1. Before Starting a New Feature (System Design)
+> *"Act as the Chief Software Architect and 16-Mind Council. Review this feature request: [Describe Feature]. Design the data model, API contracts, edge cases, and component boundaries before writing any code."*
+
+### 🎨 2. Polishing UI & User Experience (Apple Standard)
+> *"Review this screen through the lens of the Apple CTO and UI/UX Lead. Make typography, responsive layout, spacing, accessible contrast, and micro-interactions feel clean, premium, and intuitive."*
+
+### ⚡ 3. Optimizing Slow Code or Database Queries
+> *"Have the Performance Specialist and Database Reliability Engineer review our queries, caching, and state management. Identify any N+1 query patterns, memory leaks, or unindexed lookups."*
+
+### 🛡️ 4. Security & Bug Audit (Before Submitting PR)
+> *"Act as the Chief Security Officer and QA Lead. Audit this code for unhandled null/undefined values, secret leakage, unparameterized queries, and race conditions."*
+
+### 🧪 5. Deterministic Verification Gate
+> *"Run our automated test suite and typechecks using the openguild_verify_invariants tool. Do not mark this task as complete until all tests pass deterministically."*
+
+---
+
+## 🏛️ The 16-Mind Supreme Council
+
+OpenGuild models its engineering guidelines after 16 specialized roles. Each mind focuses on a critical pillar of production software:
+
+```mermaid
+graph TD
+    User([Developer / User]) --> OpenGuild[OpenGuild Unified Brain]
+    OpenGuild --> Core[Core Engineering]
+    OpenGuild --> BigTech[Big Tech CTO Minds]
+    OpenGuild --> Specialists[Deep Domain Specialists]
+    OpenGuild --> AGI[Autonomous & AGI Systems]
+
+    Core --> Arch["🧠 Chief Software Architect"]
+    Core --> UI["🎨 Principal UI/UX Lead"]
+    Core --> Sec["🛡️ Chief Security Officer"]
+    Core --> Eng["⚡ Staff Full-Stack Engineer"]
+    Core --> QA["🧪 Principal QA Lead"]
+    Core --> DevOps["🚀 DevOps Engineer"]
+
+    BigTech --> Google["🌐 Google CTO Brain (Scalability)"]
+    BigTech --> Apple["🍎 Apple CTO Brain (Aesthetics)"]
+    BigTech --> Anthropic["🧭 Anthropic Safety Brain (Alignment)"]
+
+    Specialists --> Perf["⚡ Performance Specialist (O(n), Caching)"]
+    Specialists --> DB["🗄️ Database Reliability Engineer (ACID)"]
+    Specialists --> Prod["💼 Product Strategy Lead (Anti-Bloat)"]
+
+    AGI --> Cog["🔮 Chief Cognitive Analyst (Latent Edge Cases)"]
+    AGI --> Sci["🔬 Principal AGI Scientist (Cognitive Loops)"]
+    AGI --> Heal["🧬 Self-Healing Specialist (Fault Recovery)"]
+    AGI --> Graph["📊 Knowledge Graph Architect (Vector & RAG)"]
 ```
 
 ---
 
 ## 🌐 Model Context Protocol (MCP) Server
 
-OpenGuild v2.2.0 includes a built-in MCP server that gives AI assistants live tools to **read, write, search, and recall memory**, and **consult the 12-Expert Council** in real time.
+OpenGuild exposes **10 native MCP tools** that give AI assistants live superpowers inside your editor:
 
-### 🛠️ Exposed MCP Tools:
-
-| MCP Tool | Description |
-| :--- | :--- |
-| **`openguild_read_memory`** | Read lessons, standards, or user preferences from global & team memory vaults |
-| **`openguild_write_memory`** | Save new lessons, architecture decisions, or security rules directly from chat |
-| **`openguild_search_memory`** | Search all stored memory files for keywords (e.g. "rate limits", "auth", "tokens") |
-| **`openguild_consult_council`** | Query the 12-Expert Council for multi-perspective architecture and code review |
-| **`openguild_get_project_context`** | Retrieve detected stack invariants, verification commands, and AI contracts |
-
----
-
-## 🏛️ The 12-Expert Council
-
-| # | Role | Domain & Responsibility |
-|---|------|------------------------|
-| 1 | 🧠 **Chief Software Architect** | Domain modeling, data normalization, clean boundaries & scalability |
-| 2 | 🎨 **Principal UI/UX Lead** | Responsive design, accessibility, micro-interactions & aesthetics |
-| 3 | 🛡️ **Chief Security Officer** | SAIF compliance, auth validation, secret scrubbing & least-privilege |
-| 4 | ⚡ **Staff Full-Stack Engineer** | Modular, idiomatic, clean zero-bloat production code |
-| 5 | 🧪 **Principal QA Lead** | Automated test suites, edge case verification & zero-regression proofs |
-| 6 | 🚀 **DevOps Engineer** | Hermetic builds, CI pipelines & reproducible environments |
-| 7 | 🌐 **Google CTO Brain** | Internet-scale architecture, extreme scalability & AI-first design |
-| 8 | 🍎 **Apple CTO Brain** | Uncompromising product excellence, magical UX & premium aesthetics |
-| 9 | 🧭 **Anthropic Safety Brain** | Constitutional safeguards, explainability & user-intent alignment |
-| 10 | ⚡ **Performance Specialist** | Algorithmic complexity (O(n)), zero-copy caching, memory layout & async I/O |
-| 11 | 🗄️ **Database Reliability Engineer** | ACID guarantees, schema migration safety, query execution plans & indexing |
-| 12 | 💼 **Product Strategy Lead** | Business logic edge cases, user story fidelity & preventing feature bloat |
+| MCP Tool | What It Does for the AI |
+|:---|:---|
+| `openguild_auto_analyze` | Auto-analyzes product visions and codebases to generate complete engineering blueprints |
+| `openguild_profile_tokens` | Checks AI rule token weight, efficiency scores, and context savings |
+| `openguild_verify_invariants` | Runs hermetic verification across tests, linters, types, memory, and git hygiene |
+| `openguild_audit_security` | Scans files for exposed API credentials, SQL injection, and code hazards |
+| `openguild_read_memory` | Retrieves architectural rules, user preferences, and past bugfixes |
+| `openguild_write_memory` | Saves new engineering standards or decisions directly from the chat session |
+| `openguild_learn` | Self-reflects on errors, records lessons, and automatically scrubs secrets |
+| `openguild_search_memory` | Searches memory archives using keywords (e.g., `"jwt"`, `"timeout"`, `"rate-limit"`) |
+| `openguild_consult_council` | Queries the 16-Mind Council in `debate`, `audit`, or `consensus` mode |
+| `openguild_get_project_context` | Inspects detected tech stack, test commands, and invariant rules |
 
 ---
 
-## ⚙️ CLI Reference
+## ⚙️ Complete CLI Cheat Sheet
 
-```text
-USAGE
-  $ npx antigravity-guild [command] [options]
-
-COMMANDS
-  mcp                  Start the Model Context Protocol (MCP) server over stdio
-  --setup-mcp [editor] 1-Click configure MCP for claude, cursor, antigravity, or all
-  --team               Initialize Git-versioned workspace team memory (.openguild/)
-  --lint-memory [--fix]Audit and clean memory vault for duplicate rules and bloat
-  -i, --interactive    Launch step-by-step interactive configuration wizard
-  --install-hooks      Install Git pre-commit invariant verification hook
-  --export-memory [f]  Export global memory vault to portable JSON backup
-  --import-memory <f>  Import and merge JSON memory archive into global vault
-
-OPTIONS
-  -p, --preset <name>  Apply domain preset (full, backend, web, mobile, ai-ml)
-  -h, --help           Show this help message
-  -v, --version        Print the version number
-  -s, --status         Inspect global memory hub and active council status
-  -d, --dry-run        Preview detected stack and generated contracts without writing
-      --reset          Clear and re-initialize global memory hub
-```
+| Command / Flag | Purpose | Example |
+|:---|:---|:---|
+| `npx antigravity-guild` | Initialize or update OpenGuild in current project | `npx antigravity-guild` |
+| `npx antigravity-guild --preset <name>` | Use a targeted preset (`full`, `agi`, `backend`, `web`, `mobile`, `ai-ml`) | `npx antigravity-guild --preset backend` |
+| `npx antigravity-guild --setup-mcp [editor]` | 1-Click configure MCP for `cursor`, `claude`, `antigravity`, or `all` | `npx antigravity-guild --setup-mcp all` |
+| `npx antigravity-guild --tokens` | Benchmark context token consumption and cost savings | `npx antigravity-guild --tokens` |
+| `npx antigravity-guild --verify [--fix]` | Run unified tests, lint, typecheck, and memory check | `npx antigravity-guild --verify --fix` |
+| `npx antigravity-guild --audit` | Scan project for secret leaks and code vulnerabilities | `npx antigravity-guild --audit` |
+| `npx antigravity-guild --analyze "<idea>"` | Auto-generate comprehensive architecture blueprint | `npx antigravity-guild --analyze "Real-time sync engine"` |
+| `npx antigravity-guild --learn "<insight>"` | Record an engineering lesson with secret scrubbing | `npx antigravity-guild --learn "Use redis locks for queue jobs"` |
+| `npx antigravity-guild --team` | Initialize Git-shared team memory in `.openguild/` | `npx antigravity-guild --team` |
+| `npx antigravity-guild --setup-ci` | Generate GitHub Actions Council Review workflow | `npx antigravity-guild --setup-ci` |
+| `npx antigravity-guild --lint-memory [--fix]` | Clean duplicate rules and format memory vault | `npx antigravity-guild --lint-memory --fix` |
+| `npx antigravity-guild --status` | Inspect active memory files, council status, and stats | `npx antigravity-guild --status` |
+| `npx antigravity-guild --export-memory` | Backup memory vault to JSON file | `npx antigravity-guild --export-memory backup.json` |
+| `npx antigravity-guild --import-memory <file>`| Restore or merge memory vault from JSON backup | `npx antigravity-guild --import-memory backup.json` |
+| `npx antigravity-guild --install-hooks` | Install Git pre-commit invariant verification hook | `npx antigravity-guild --install-hooks` |
+| `npx antigravity-guild --dry-run` | Preview actions without modifying disk | `npx antigravity-guild --dry-run` |
 
 ---
 
-## 🧪 Verification & Determinism
+## 🔒 Privacy, Security & Zero-Dependency Guarantee
 
-```bash
-npm test
-```
+- **100% Pure Node.js Built-ins:** Requires zero npm dependencies. No bloated node_modules trees, no supply chain vulnerabilities.
+- **Runs Exclusively on Your Machine:** Never sends your code, prompts, memory, or metadata to external servers or third-party cloud APIs.
+- **Automated Secret Scrubbing:** Automatically detects and strips API keys, OAuth tokens, and private keys before anything touches memory.
+- **Safe, Non-Destructive Merging:** Never blindly overwrites existing `.cursorrules` or configuration files; intelligently merges rules while preserving your custom instructions.
 
-Tested continuously across **Ubuntu, macOS, and Windows** on Node.js 18, 20, 22, and 24.
+---
+
+## ❓ Frequently Asked Questions (FAQ)
+
+### Does OpenGuild slow down my editor or chat?
+**No, it speeds it up.** Traditional prompt templates dump thousands of lines into the base context, causing slow responses and attention drift. OpenGuild uses an ultra-lean base contract (~770 tokens) and lets the AI query deeper memory via lightweight MCP tools only when needed.
+
+### Where is my global memory stored?
+Global memory lives in `~/.openguild/memory/` on your machine (`C:\Users\<User>\.openguild\memory` on Windows). It is organized into clean markdown files (`institutional_memory.md`, `security_standards.md`, `user_profile.md`) that you can inspect and edit anytime.
+
+### How do I share memory with my teammates?
+Run `npx antigravity-guild --team`. This creates a `.openguild/` folder inside your repository. Commit this folder to Git. Any teammate who pulls the repository will automatically share project architecture decisions and team standards.
+
+### Can I use OpenGuild with existing projects?
+**Yes.** OpenGuild was designed specifically for existing, mature codebases. It automatically detects your package manager, test scripts, and directory layout without breaking existing workflows.
 
 ---
 
 ## 📄 License
 
-[MIT](LICENSE) © Hardik Patel
+MIT © [Hardik Patel](https://github.com/imHBpatel)

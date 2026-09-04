@@ -16,6 +16,12 @@ const { exportMemory, importMemory } = require('../lib/sync');
 const { setupEditorMcp } = require('../lib/editor_config');
 const { lintAllMemory } = require('../lib/memory_linter');
 const { initTeamMemory } = require('../lib/team_memory');
+const { recordLesson } = require('../lib/learn');
+const { generateCiWorkflow } = require('../lib/ci');
+const { autoAnalyze } = require('../lib/analyzer');
+const { profileTokens } = require('../lib/token_profiler');
+const { verifyProject } = require('../lib/verifier');
+const { auditSecurity } = require('../lib/security_auditor');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
@@ -36,13 +42,102 @@ if (args.includes('--setup-mcp')) {
   process.exit(0);
 }
 
-// 3. Workspace Team Memory Initialization
+// 3. Autonomous Auto-Analyst & Architecture Blueprint Synthesis
+if (args.includes('--analyze') || args.includes('-a') || args[0] === 'analyze') {
+  const analyzeIdx = args.indexOf('--analyze') !== -1
+    ? args.indexOf('--analyze') + 1
+    : args.indexOf('-a') !== -1
+      ? args.indexOf('-a') + 1
+      : 1;
+  const visionArg = args[analyzeIdx] && !args[analyzeIdx].startsWith('-') ? args[analyzeIdx] : null;
+
+  console.log(autoAnalyze(visionArg, { projectDir: process.cwd() }));
+  process.exit(0);
+}
+
+// 4. Token Profiler & Context Diet Optimizer
+if (args.includes('--tokens') || args.includes('--optimize-context')) {
+  const result = profileTokens(process.cwd());
+  console.log(result.reportMarkdown);
+  process.exit(0);
+}
+
+// 5. Unified Deterministic Invariant Verifier
+if (args.includes('--verify')) {
+  const autoFix = args.includes('--fix');
+  const result = verifyProject(process.cwd(), { autoFix });
+  console.log(result.reportMarkdown);
+  process.exit(result.passed ? 0 : 1);
+}
+
+// 6. Deep Security & SAIF Codebase Auditor
+if (args.includes('--audit') || args[0] === 'audit') {
+  const result = auditSecurity(process.cwd());
+  console.log(result.reportMarkdown);
+  process.exit(result.grade === 'F' ? 1 : 0);
+}
+
+// 7. 1-Click CI/CD Council Reviewer Generator
+if (args.includes('--setup-ci')) {
+  const isDryRun = args.includes('--dry-run') || args.includes('-d');
+  const res = generateCiWorkflow(process.cwd(), isDryRun);
+  if (isDryRun) {
+    console.log(`${c.yellow}🧪 [DRY RUN]${c.reset} Previewing CI workflow at: ${res.path}\n`);
+    console.log(res.content);
+  } else if (res.created) {
+    console.log(`${c.green}✅ [Created]${c.reset} GitHub Actions Council Review workflow at: ${c.dim}${res.path}${c.reset}`);
+    console.log(`   Enforces test, lint, typecheck, and memory integrity on every PR.`);
+  } else {
+    console.log(`${c.green}✅ [Updated]${c.reset} GitHub Actions Council Review workflow at: ${c.dim}${res.path}${c.reset}`);
+  }
+  process.exit(0);
+}
+
+// 4. Autonomous Learning Engine
+if (args.includes('--learn') || args[0] === 'learn') {
+  const learnIdx = args.indexOf('--learn') !== -1 ? args.indexOf('--learn') + 1 : 1;
+  const insight = args[learnIdx] && !args[learnIdx].startsWith('-') ? args[learnIdx] : null;
+
+  if (!insight) {
+    console.error(`${c.red}✖ Missing insight text for --learn.${c.reset}`);
+    console.error('  Usage: npx antigravity-guild --learn "Always validate user input with zod" [--category security] [--team]');
+    process.exit(1);
+  }
+
+  const categoryIdx = args.indexOf('--category') !== -1 ? args.indexOf('--category') + 1 : -1;
+  const category = categoryIdx !== -1 && args[categoryIdx] && !args[categoryIdx].startsWith('-') ? args[categoryIdx] : null;
+
+  const scope = args.includes('--team') ? 'team' : 'global';
+
+  try {
+    const res = recordLesson(insight, {
+      scope,
+      category,
+      projectDir: process.cwd(),
+    });
+    if (res.isDuplicate) {
+      console.log(`${c.yellow}ℹ [Deduplicated]${c.reset} ${res.message}`);
+    } else {
+      console.log(`${c.green}🧠 [Learned]${c.reset} ${res.message}`);
+      if (res.scrubbed) {
+        console.log(`${c.yellow}🛡️  [Sanitized]${c.reset} Sensitive credentials/tokens were automatically scrubbed.`);
+      }
+      console.log(`   ${c.dim}${res.entry}${c.reset}`);
+    }
+  } catch (err) {
+    console.error(`${c.red}✖ Error recording lesson: ${err.message}${c.reset}`);
+    process.exit(1);
+  }
+  process.exit(0);
+}
+
+// 5. Workspace Team Memory Initialization
 if (args.includes('--team')) {
   initTeamMemory(process.cwd());
   process.exit(0);
 }
 
-// 4. Memory Vault Linter & Deduplicator
+// 6. Memory Vault Linter & Deduplicator
 if (args.includes('--lint-memory') || args[0] === 'lint-memory') {
   lintAllMemory(process.cwd(), args.includes('--fix'));
   process.exit(0);

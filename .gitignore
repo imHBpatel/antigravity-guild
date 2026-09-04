@@ -13,3 +13,17 @@ target/
 .env.*
 *.key
 *.pem
+
+# === OpenGuild Context Hygiene ===
+env/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+out/
+.nuxt/
+.svelte-kit/
+.turbo/
+.nx/
+.DS_Store
+Thumbs.db

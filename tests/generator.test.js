@@ -35,6 +35,10 @@ console.log('🧪 Running Generator & Rule Synthesis Tests...');
   assert(rule.includes('**Performance & Latency Specialist**'), 'Must include Performance Specialist');
   assert(rule.includes('**Database Reliability Engineer**'), 'Must include Database Reliability Engineer');
   assert(rule.includes('**Product & Domain Strategy Lead**'), 'Must include Product Lead');
+  assert(rule.includes('**Chief Cognitive Analyst & Requirements Oracle**'), 'Must include Cognitive Analyst');
+  assert(rule.includes('**Principal AGI & Cognitive Architecture Scientist**'), 'Must include AGI Scientist');
+  assert(rule.includes('**Autonomous Self-Healing & Evolution Specialist**'), 'Must include Self-Healing Specialist');
+  assert(rule.includes('**High-Dimensional Knowledge & Vector Graph Architect**'), 'Must include Knowledge Graph Architect');
 
   // Assert verification invariants
   assert(rule.includes('pnpm test'), 'Must include test command');
@@ -46,16 +50,21 @@ console.log('🧪 Running Generator & Rule Synthesis Tests...');
   assert(rule.includes('Destructive Operation Gate'), 'Must include destructive operation gate');
   assert(rule.includes('Zero Secret Exposure'), 'Must include secret exposure invariant');
 
-  console.log('  ✔ 12-Expert Council and Constitutional Invariants verified');
+  console.log('  ✔ 16-Mind Supreme Council and Constitutional Invariants verified');
 }
 
-// 2. Preset Testing: backend vs mobile
+// 2. Preset Testing: backend, mobile, & agi
 {
   const stack = { lang: 'Go', framework: 'Gin', pkgManager: 'go', isMonorepo: false, testCmd: 'go test ./...', lintCmd: 'golangci-lint run', typecheckCmd: 'go vet ./...' };
   const backendRule = buildRuleContent('api', '/mem', stack, 'backend');
   assert(backendRule.includes('Backend & Distributed Systems'));
   assert(backendRule.includes('Database Reliability Engineer'));
   assert(!backendRule.includes('Principal UI/UX Lead'), 'Backend preset should not include UI/UX');
+
+  const agiRule = buildRuleContent('agent-system', '/mem', stack, 'agi');
+  assert(agiRule.includes('AGI & Autonomous Cognitive Systems'));
+  assert(agiRule.includes('Principal AGI & Cognitive Architecture Scientist'));
+  assert(agiRule.includes('Autonomous Self-Healing & Evolution Specialist'));
 
   const mobileRule = buildRuleContent('app', '/mem', stack, 'mobile');
   assert(mobileRule.includes('Mobile & Client Apps'));
