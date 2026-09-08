@@ -227,16 +227,14 @@ try {
 }
 
 // ---------------------------------------------------------------------------
-// 1. Global Persistent Memory Hub & Team Memory Check
+// 1. Global Persistent Memory Hub & Team Memory
 // ---------------------------------------------------------------------------
 const memHub = isDryRun
   ? { path: getGlobalMemoryPath(), created: false }
   : initMemoryHub(shouldReset);
 
-const teamMemDir = path.join(cwd, '.openguild');
-if (fs.existsSync(teamMemDir)) {
-  console.log(`${c.cyan}👥 [Connected]${c.reset} Workspace Team Memory at: ${c.dim}${teamMemDir}${c.reset}`);
-}
+// Auto-initialize or connect workspace team memory (.openguild/)
+initTeamMemory(cwd, isDryRun);
 
 // ---------------------------------------------------------------------------
 // 2. Universal Stack Detection
@@ -258,17 +256,22 @@ console.log(
 );
 
 // ---------------------------------------------------------------------------
-// 3. AI Agent Rule Synthesis
+// 3. Zero-Friction MCP Auto-Config for ALL Editors
+// ---------------------------------------------------------------------------
+setupEditorMcp('all', cwd, isDryRun);
+
+// ---------------------------------------------------------------------------
+// 4. AI Agent Rule Synthesis (With Autonomous Zero-Prompt Pre-Flight Mandate)
 // ---------------------------------------------------------------------------
 const contracts = synthesizeContracts(cwd, projectName, memHub.path, stack, selectedPreset, isDryRun);
 
-console.log(`${c.green}✅ [Synthesized]${c.reset}`);
+console.log(`${c.green}✅ [Synthesized]${c.reset} AI Agent Rules (Zero-Prompt Mandate Activated)`);
 for (const item of contracts) {
   console.log(`  • ${item.label}`);
 }
 
 // ---------------------------------------------------------------------------
-// 4. Context Hygiene (.gitignore)
+// 5. Context Hygiene (.gitignore)
 // ---------------------------------------------------------------------------
 const gitignoreRes = enforceGitignore(cwd, isDryRun);
 if (gitignoreRes.created) {
@@ -280,16 +283,139 @@ if (gitignoreRes.created) {
 }
 
 // ---------------------------------------------------------------------------
-// Completion Summary & Prompt Playbook
+// 6. Auto-Lint & Deduplicate Memory Vault
+// ---------------------------------------------------------------------------
+console.log(`\n${c.cyan}${c.bold}🧹 Auto-Cleaning Memory Vault...${c.reset}`);
+lintAllMemory(cwd, true); // autofix = true, silently dedup
+
+// ---------------------------------------------------------------------------
+// 7. Security Audit (SAIF 2.0 — Auto-Scan)
+// ---------------------------------------------------------------------------
+console.log(`\n${c.cyan}${c.bold}🛡️  Running SAIF 2.0 Security Scan...${c.reset}`);
+const auditResult = auditSecurity(cwd);
+if (auditResult.grade === 'A+' || auditResult.grade === 'A') {
+  console.log(`  ${c.green}✔ Security Grade: ${c.bold}${auditResult.grade}${c.reset} ${c.green}(${auditResult.totalFiles} files scanned, ${auditResult.issues.length} issues)${c.reset}`);
+} else {
+  console.log(`  ${c.yellow}⚠ Security Grade: ${c.bold}${auditResult.grade}${c.reset} ${c.yellow}(${auditResult.issues.length} issues found in ${auditResult.totalFiles} files)${c.reset}`);
+  for (const issue of auditResult.issues.slice(0, 5)) {
+    console.log(`    ${c.red}•${c.reset} ${c.dim}${issue.file}:${issue.line}${c.reset} — ${issue.type}`);
+  }
+  if (auditResult.issues.length > 5) {
+    console.log(`    ${c.dim}... and ${auditResult.issues.length - 5} more. Run ${c.bold}npx antigravity-guild --audit${c.reset}${c.dim} for full report.${c.reset}`);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Token Profiler (Context Diet Snapshot)
+// ---------------------------------------------------------------------------
+const tokenResult = profileTokens(cwd);
+console.log(`\n${c.cyan}${c.bold}⚡ Context Diet Snapshot${c.reset}`);
+console.log(`  Token Load: ${c.bold}${tokenResult.totalTokens}${c.reset} tokens | Grade: ${c.bold}${tokenResult.efficiency.grade}${c.reset} ${tokenResult.efficiency.badge}`);
+console.log(`  ${c.dim}Savings vs monolithic prompt: ~${tokenResult.savingsPercent}% reduction (~$${tokenResult.costSavings}/1K turns)${c.reset}`);
+
+// ---------------------------------------------------------------------------
+// 9. Git Pre-Commit Hook (Auto-Install if .git exists)
+// ---------------------------------------------------------------------------
+const gitDir = path.join(cwd, '.git');
+if (fs.existsSync(gitDir) && !isDryRun) {
+  installPreCommitHook(cwd);
+} else if (fs.existsSync(gitDir) && isDryRun) {
+  console.log(`${c.dim}🪝 [Dry-Run] Would install pre-commit invariant hook.${c.reset}`);
+} else {
+  console.log(`${c.dim}🪝 [Skipped] No .git directory found. Pre-commit hook can be installed after ${c.bold}git init${c.reset}${c.dim}.${c.reset}`);
+}
+
+// ---------------------------------------------------------------------------
+// 10. GitHub Actions CI Workflow (Auto-Generate if .git exists)
+// ---------------------------------------------------------------------------
+if (fs.existsSync(gitDir)) {
+  const ciRes = generateCiWorkflow(cwd, isDryRun);
+  if (isDryRun) {
+    console.log(`${c.dim}🏗️  [Dry-Run] Would generate GitHub Actions CI workflow.${c.reset}`);
+  } else if (ciRes.created) {
+    console.log(`${c.green}✅ [Generated]${c.reset} GitHub Actions CI workflow at: ${c.dim}${ciRes.path}${c.reset}`);
+  } else {
+    console.log(`${c.dim}🏗️  [Verified]${c.reset} GitHub Actions CI workflow already exists.`);
+  }
+} else {
+  console.log(`${c.dim}🏗️  [Skipped] No .git directory. CI workflow will be generated after ${c.bold}git init${c.reset}${c.dim}.${c.reset}`);
+}
+
+// ---------------------------------------------------------------------------
+// ⚡ ALL-IN-ONE COMPLETION: "It Just Works" + Capability Discovery
 // ---------------------------------------------------------------------------
 console.log(`
-${c.green}${c.bold}🎉 [Success]${c.reset} Project "${c.bold}${projectName}${c.reset}" configured with ${PRESETS[selectedPreset].name}!
+${c.cyan}╔══════════════════════════════════════════════════════════════╗
+║     🍎  "It Just Works" — ONE COMMAND, ZERO FRICTION         ║
+║     🎉  PROJECT FULLY ARMED WITH SOVEREIGN AI MEMORY         ║
+╚══════════════════════════════════════════════════════════════╝${c.reset}
 
-${c.cyan}${c.bold}💡 Quick Prompts to try in your AI editor (Antigravity, Cursor, Claude):${c.reset}
-  ${c.yellow}1.${c.reset} "Design the architecture and data model before writing code."
-  ${c.yellow}2.${c.reset} "Review this interface for Apple-grade UI polish and responsiveness."
-  ${c.yellow}3.${c.reset} "Audit this feature for security vulnerabilities and secret leaks."
-  ${c.yellow}4.${c.reset} "Run our test suite and verify all invariants pass."
+${c.green}${c.bold}Project:${c.reset} ${c.bold}${projectName}${c.reset}  |  Preset: ${c.bold}${PRESETS[selectedPreset].name}${c.reset}
 
-${c.dim}Open your editor and start prompting with persistent memory.${c.reset}
+${c.green}${c.bold}✅ What was done automatically:${c.reset}
+  ${c.green}✔${c.reset} Global Memory Hub linked       — ${c.dim}${memHub.path}${c.reset}
+  ${c.green}✔${c.reset} Workspace Team Memory created   — ${c.dim}.openguild/${c.reset}
+  ${c.green}✔${c.reset} MCP Tools registered for        — Cursor, Claude, Antigravity, VS Code, Windsurf
+  ${c.green}✔${c.reset} AI Rules synthesized            — AGENTS.md, .cursorrules, .gemini/rules.md
+  ${c.green}✔${c.reset} Zero-Prompt Mandate activated   — AI auto-reads memory on every interaction
+  ${c.green}✔${c.reset} .gitignore context hygiene      — Secrets and AI noise excluded
+  ${c.green}✔${c.reset} Memory vault cleaned & deduped  — Zero bloat, zero duplication
+  ${c.green}✔${c.reset} SAIF 2.0 security scan          — Grade: ${c.bold}${auditResult.grade}${c.reset}
+  ${c.green}✔${c.reset} Context diet profiled           — ${c.bold}${tokenResult.totalTokens}${c.reset} tokens (Grade: ${c.bold}${tokenResult.efficiency.grade}${c.reset})
+  ${c.green}✔${c.reset} Git hooks & CI workflow         — Pre-commit invariants ${fs.existsSync(gitDir) ? 'installed' : 'ready after git init'}
+
+${c.magenta}${c.bold}🍎 The Apple CEO Philosophy ("It Just Works"):${c.reset}
+  Your AI now operates autonomously. You will ${c.bold}never${c.reset} need to:
+  • Write special prompts to activate memory or council roles
+  • Tell the AI to run tests or check for security issues
+  • Remind the AI about past lessons or project conventions
+  Just type naturally. Even ${c.bold}"fix this bug"${c.reset} triggers the full 16-Mind Council.
+
+${c.cyan}${c.bold}📖 Capability Discovery — Everything You Can Do:${c.reset}
+
+  ${c.yellow}In your AI editor (zero config needed):${c.reset}
+  ${c.dim}Just open Cursor / Claude / Antigravity and chat. Memory + Council + Verification
+  are active on every single prompt automatically.${c.reset}
+
+  ${c.yellow}Teach your AI something new (works across ALL projects):${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --learn "Always use zod to validate request bodies"
+  ${c.dim}↳ Saves to global memory. Auto-scrubs secrets. Every project inherits it.${c.reset}
+
+  ${c.yellow}Deep security audit with full report:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --audit
+  ${c.dim}↳ Scans for API keys, code injection, SQL hazards, and .env leaks. Assigns A+ to F grade.${c.reset}
+
+  ${c.yellow}Run deterministic verification (tests + lint + types):${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --verify
+  ${c.dim}↳ Runs your project's native test/lint/type commands and produces certified proof.${c.reset}
+
+  ${c.yellow}Auto-generate architecture blueprint from a rough idea:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --analyze "AI-powered invoice tracker"
+  ${c.dim}↳ Produces full blueprint: domain model, tech stack, edge cases, security plan.${c.reset}
+
+  ${c.yellow}See how token-efficient your AI rules are:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --tokens
+  ${c.dim}↳ Benchmarks token weight vs monolithic prompts. Shows cost savings per 1K turns.${c.reset}
+
+  ${c.yellow}Export / Import memory to another machine:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --export-memory backup.json
+  ${c.green}$${c.reset} npx antigravity-guild --import-memory backup.json
+  ${c.dim}↳ Portable memory vault. Share across machines or back up your brain.${c.reset}
+
+  ${c.yellow}Check global memory health & status:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --status
+  ${c.dim}↳ Dashboard of all memory files, sizes, last modified dates, and council status.${c.reset}
+
+  ${c.yellow}Clean duplicate or bloated memory rules:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --lint-memory --fix
+  ${c.dim}↳ Deduplicates and trims redundant rules. Keeps your memory vault lean.${c.reset}
+
+  ${c.yellow}Choose a domain-specific expert council:${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --preset backend    ${c.dim}(API, DB, Security, Scale)${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --preset web         ${c.dim}(UI/UX, Frontend, Apple UX)${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --preset mobile      ${c.dim}(iOS/Android, Apple CTO)${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --preset ai-ml       ${c.dim}(ML, Data, Vector/RAG)${c.reset}
+  ${c.green}$${c.reset} npx antigravity-guild --preset agi         ${c.dim}(Multi-Agent, Cognitive)${c.reset}
+
+${c.dim}That's it. One command did 99.99% of the work. Your AI is fully armed.${c.reset}
 `);

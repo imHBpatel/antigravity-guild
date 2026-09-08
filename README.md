@@ -2,7 +2,7 @@
 
 > **Turn your AI coding assistant into a 16-person staff engineering team that never forgets a bug, never leaks a secret, and saves thousands of tokens on every chat turn.**
 
-[![Version](https://img.shields.io/badge/version-2.5.0-blue.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-2.6.0-blue.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
@@ -29,7 +29,7 @@ If you use Cursor, Claude, or Antigravity to write code every day, you know thes
 
 ### ✨ How OpenGuild Fixes This
 
-| Without OpenGuild | With OpenGuild v2.5.0 |
+| Without OpenGuild | With OpenGuild v2.6.0 |
 |:---|:---|
 | AI forgets project lessons every time you open a new chat | **Cross-project memory vault** remembers every architectural rule and bugfix forever |
 | 4,500+ tokens burned on monolithic rules per turn | **Lean 770-token base contract** (80-85% token diet) with instant sub-second streaming |
@@ -39,40 +39,41 @@ If you use Cursor, Claude, or Antigravity to write code every day, you know thes
 
 ---
 
-## ⚡ Quick Start in 60 Seconds
+## ⚡ Quick Start: Zero Friction, "It Just Works"
 
-You don't need to install anything globally or create an account. OpenGuild runs directly via `npx` with **zero external dependencies**.
+Like an Apple product, OpenGuild eliminates configuration rituals. You don't need multiple commands, complex flags, or magic prompting rituals.
 
-### Step 1: Initialize your project
-Open your terminal, navigate to your project, and run:
+Navigate to **any project on your computer** and run **one single command**:
 
 ```bash
-cd your-awesome-project
+cd your-project
 npx antigravity-guild
 ```
 
-OpenGuild automatically detects your stack (Next.js, FastAPI, Rust Axum, Go, Flutter, etc.) and synthesizes non-destructive rule contracts:
-- `AGENTS.md` (Universal Agent standard)
-- `.cursorrules` (Cursor IDE)
-- `.gemini/rules.md` (Antigravity & Gemini)
-- `~/.openguild/memory` (Your global, cross-project memory vault)
+### 🍎 What OpenGuild Does Automatically in 1 Second (99.99% Done):
+1. **Links Your Global Persistent Memory Hub (`~/.openguild/memory`):** Connects past lessons, bug fixes, and architectural standards learned across all previous projects.
+2. **Initializes Workspace Team Memory (`.openguild/`):** Sets up version-controlled project memory so teammates automatically share project-specific architecture decisions.
+3. **Auto-Detects Universal Stack:** Identifies language (JS/TS/Python/Go/Rust/Flutter/Swift), framework, package manager, and monorepo tooling.
+4. **Auto-Configures Editor MCP (Zero-Click):** Configures OpenGuild's native MCP server in Cursor, Claude Desktop, Antigravity / Gemini, VS Code, and Windsurf.
+5. **Synthesizes AI Agent Rules (Zero-Prompt Mandate):** Writes `AGENTS.md`, `.cursorrules`, and `.gemini/rules.md` so the AI autonomously reviews memory, runs tests, and applies council rules without special prompting.
+6. **Enforces Context Hygiene:** Updates `.gitignore` to protect API keys, credentials, and exclude AI context noise.
+7. **Auto-Lints & Cleans Memory Vault:** Deduplicates and prunes redundant rules to keep your persistent memory razor-sharp.
+8. **Runs SAIF 2.0 Security Audit:** Scans the codebase for committed secrets, dangerous code execution, and SQL hazards, assigning an instant letter grade (A+ to F).
+9. **Profiles Context Diet & Token Savings:** Estimates active token load vs monolithic prompts, showing 80-85% token reduction and dollar savings.
+10. **Installs Git Pre-Commit Hooks & Generates CI:** Automatically installs deterministic invariant pre-commit hooks and generates GitHub Actions council workflows.
 
 ---
 
-### Step 2: Connect your AI editor (1-Click)
-Run this command to automatically register OpenGuild's native MCP server in your editor's configuration:
+### 💬 Just Chat Normally — Zero Prompt Burden
+You **never** need to remember to tell your AI: *"Check memory"* or *"Act as the 16-mind council"*.
 
-```bash
-# Auto-configures Cursor, Claude Desktop, and Antigravity IDE
-npx antigravity-guild --setup-mcp all
-```
+Even if you type a short, casual prompt:
+> *"fix the checkout bug"*
 
-*Prefer a specific editor? Use `npx antigravity-guild --setup-mcp cursor` or `claude`.*
-
----
-
-### Step 3: Chat with your AI normally
-Open your editor and prompt your assistant. You will instantly notice the difference. Your AI now has deep memory, high standards, and 10 real-time tools.
+Your AI assistant will **autonomously**:
+1. Search your global memory for past payment/checkout lessons.
+2. Review the code through Architecture, Security (SAIF 2.0), and QA lenses.
+3. Fix the issue, run the project test suite, and record any new lessons so future projects never make the same mistake.
 
 ---
 

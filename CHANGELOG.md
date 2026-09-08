@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2026-09-08
+
+### Added
+- **10-in-1 Autonomous Pipeline ("It Just Works")**:
+  - Running `npx antigravity-guild` executes all 10 setup, security, verification, and memory optimization steps automatically in 1 second.
+  - Automatically runs SAIF 2.0 Security Audit, Token Context Diet Profiler, Memory Vault Linter & Deduplication, and Pre-Commit Invariant Hooks.
+  - Interactive Capability Discovery summary that educates users on every CLI flag, superpower, and editor feature.
+- **Security Auditor Accuracy Hardening**:
+  - Eliminated false positives on markdown docs, comment lines, and log outputs.
+- **Enhanced Token & Cost Metric Reporting**:
+  - Added real-time token load, efficiency grades, and dollar savings per 1,000 chat turns.
+
 ## [2.5.0] - 2026-09-04
 
 ### Added

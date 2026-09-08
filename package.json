@@ -1,6 +1,6 @@
 {
   "name": "antigravity-guild",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Zero-config persistent memory, 16-Mind Supreme AGI Council, autonomous auto-analyst, learning engine, and team memory for Antigravity IDE, Cursor, Gemini, and Claude.",
   "main": "bin/cli.js",
   "bin": {

@@ -14,7 +14,7 @@ const cliPath = path.resolve(__dirname, '../bin/cli.js');
 // 1. --version flag
 {
   const out = execSync(`node "${cliPath}" --version`, { encoding: 'utf8' }).trim();
-  assert(out.includes('OpenGuild v2.5.0'), `Expected v2.5.0, got ${out}`);
+  assert(out.includes('OpenGuild v2.6.0'), `Expected v2.6.0, got ${out}`);
   console.log('  ✔ CLI --version flag verified');
 }
 
@@ -143,6 +143,22 @@ const cliPath = path.resolve(__dirname, '../bin/cli.js');
   assert(out.includes('OpenGuild SAIF 2.0 Security Audit'), 'Must run security auditor');
   assert(out.includes('Security Grade:'), 'Must produce security grade');
   console.log('  ✔ CLI --audit flag verified');
+}
+
+// 14. All-In-One Zero-Prompt Setup (Steve Jobs "It Just Works" test)
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'openguild-apple-setup-'));
+  fs.writeFileSync(path.join(tmpDir, 'package.json'), JSON.stringify({ name: 'apple-app', scripts: { test: 'node -e "process.exit(0)"' } }));
+  const out = execSync(`node "${cliPath}"`, { cwd: tmpDir, encoding: 'utf8' });
+  assert(out.includes('It Just Works'), 'Must output Apple philosophy banner');
+  assert(fs.existsSync(path.join(tmpDir, '.cursor', 'mcp.json')), 'Must auto-generate cursor mcp.json');
+  assert(fs.existsSync(path.join(tmpDir, '.gemini', 'mcp_config.json')), 'Must auto-generate gemini mcp_config.json');
+  assert(fs.existsSync(path.join(tmpDir, '.openguild', 'team_memory.md')), 'Must auto-generate team_memory.md');
+  assert(fs.existsSync(path.join(tmpDir, 'AGENTS.md')), 'Must auto-generate AGENTS.md');
+  const agentsContent = fs.readFileSync(path.join(tmpDir, 'AGENTS.md'), 'utf8');
+  assert(agentsContent.includes('Autonomous Pre-Flight Protocol (Zero-Prompt Mandate)'), 'Must include Zero-Prompt Mandate');
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+  console.log('  ✔ All-In-One Zero-Prompt Setup verified');
 }
 
 console.log('✨ All CLI End-to-End Tests Passed!\n');

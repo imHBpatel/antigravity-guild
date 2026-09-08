@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "openguild": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "antigravity-guild",
+        "mcp"
+      ]
+    }
+  }
+}

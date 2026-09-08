@@ -50,7 +50,11 @@ console.log('🧪 Running Generator & Rule Synthesis Tests...');
   assert(rule.includes('Destructive Operation Gate'), 'Must include destructive operation gate');
   assert(rule.includes('Zero Secret Exposure'), 'Must include secret exposure invariant');
 
-  console.log('  ✔ 16-Mind Supreme Council and Constitutional Invariants verified');
+  // Assert Autonomous Pre-Flight Mandate
+  assert(rule.includes('Autonomous Pre-Flight Protocol (Zero-Prompt Mandate)'), 'Must include Autonomous Pre-Flight Mandate');
+  assert(rule.includes('Auto-Ingest Global & Team Memory First'), 'Must instruct auto-ingest');
+
+  console.log('  ✔ 16-Mind Supreme Council, Zero-Prompt Mandate, and Invariants verified');
 }
 
 // 2. Preset Testing: backend, mobile, & agi
