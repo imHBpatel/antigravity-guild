@@ -22,6 +22,12 @@ const { autoAnalyze } = require('../lib/analyzer');
 const { profileTokens } = require('../lib/token_profiler');
 const { verifyProject } = require('../lib/verifier');
 const { auditSecurity } = require('../lib/security_auditor');
+const { generateRepoMap } = require('../lib/repomap');
+const { initMemoryBank, readMemoryBank } = require('../lib/memory_bank');
+const { searchMemoryVaults } = require('../lib/hybrid_search');
+const { resolveAllVaultConflicts } = require('../lib/conflict_resolver');
+const { runCouncilSop } = require('../lib/council_sop');
+const { packCodebase } = require('../lib/packager');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
@@ -42,7 +48,71 @@ if (args.includes('--setup-mcp')) {
   process.exit(0);
 }
 
-// 3. Autonomous Auto-Analyst & Architecture Blueprint Synthesis
+// 3. Council SOP Multi-Agent Review Pipeline (MetaGPT Superpower)
+if (args.includes('--review') || args.includes('--sop') || args[0] === 'review') {
+  const revIdx = args.indexOf('--review') !== -1
+    ? args.indexOf('--review') + 1
+    : args.indexOf('--sop') !== -1
+      ? args.indexOf('--sop') + 1
+      : 1;
+  const target = args[revIdx] && !args[revIdx].startsWith('-') ? args[revIdx] : process.cwd();
+  const result = runCouncilSop(target);
+  console.log(result.reportMarkdown);
+  process.exit(result.passed ? 0 : 1);
+}
+
+// 4. Smart Codebase Context Packager (Repomix Superpower)
+if (args.includes('--pack') || args[0] === 'pack') {
+  const packIdx = args.indexOf('--pack') !== -1 ? args.indexOf('--pack') + 1 : 1;
+  const target = args[packIdx] && !args[packIdx].startsWith('-') ? args[packIdx] : process.cwd();
+  const outIdx = args.indexOf('--output') !== -1 ? args.indexOf('--output') + 1 : -1;
+  const outputFile = outIdx !== -1 && args[outIdx] && !args[outIdx].startsWith('-') ? args[outIdx] : null;
+  const result = packCodebase(target, { outputFile });
+  if (outputFile) {
+    console.log(`${c.green}📦 [Packaged]${c.reset} ${result.fileCount} files into: ${c.dim}${result.outputPath}${c.reset} (~${result.totalTokens} tokens)`);
+  } else {
+    console.log(result.bundleMarkdown);
+    console.log(`\n${c.dim}📦 Bundled ${result.fileCount} source files | ~${result.totalTokens} tokens${c.reset}`);
+  }
+  process.exit(0);
+}
+
+// 5. Probabilistic BM25 Okapi Memory Search (Mem0 Superpower)
+if (args.includes('--search') || args.includes('-q') || args[0] === 'search') {
+  const searchIdx = args.indexOf('--search') !== -1
+    ? args.indexOf('--search') + 1
+    : args.indexOf('-q') !== -1
+      ? args.indexOf('-q') + 1
+      : 1;
+  const query = args[searchIdx] && !args[searchIdx].startsWith('-') ? args[searchIdx] : '';
+
+  if (!query) {
+    console.error(`${c.red}✖ Missing search query for --search.${c.reset}`);
+    console.error('  Usage: npx antigravity-guild --search "auth tokens"');
+    process.exit(1);
+  }
+
+  const memoryDirs = [
+    { label: 'Global Memory Vault', dir: getGlobalMemoryPath() },
+    { label: 'Workspace Team Memory', dir: path.join(process.cwd(), '.openguild') },
+  ];
+  const res = searchMemoryVaults(memoryDirs, query);
+  console.log(res.markdown);
+  process.exit(0);
+}
+
+// 4. Memory Conflict & Evolution Resolver
+if (args.includes('--resolve-conflicts')) {
+  const memoryDirs = [
+    getGlobalMemoryPath(),
+    path.join(process.cwd(), '.openguild'),
+  ];
+  const res = resolveAllVaultConflicts(memoryDirs, { dryRun: args.includes('--dry-run') });
+  console.log(res.markdown);
+  process.exit(0);
+}
+
+// 5. Autonomous Auto-Analyst & Architecture Blueprint Synthesis
 if (args.includes('--analyze') || args.includes('-a') || args[0] === 'analyze') {
   const analyzeIdx = args.indexOf('--analyze') !== -1
     ? args.indexOf('--analyze') + 1
@@ -52,6 +122,28 @@ if (args.includes('--analyze') || args.includes('-a') || args[0] === 'analyze') 
   const visionArg = args[analyzeIdx] && !args[analyzeIdx].startsWith('-') ? args[analyzeIdx] : null;
 
   console.log(autoAnalyze(visionArg, { projectDir: process.cwd() }));
+  process.exit(0);
+}
+
+// 4. Token-Efficient AST Symbol Repo-Map (Aider Superpower)
+if (args.includes('--repomap') || args.includes('-m') || args[0] === 'repomap') {
+  const mapIdx = args.indexOf('--repomap') !== -1
+    ? args.indexOf('--repomap') + 1
+    : args.indexOf('-m') !== -1
+      ? args.indexOf('-m') + 1
+      : 1;
+  const queryArg = args[mapIdx] && !args[mapIdx].startsWith('-') ? args[mapIdx] : '';
+  const res = generateRepoMap(process.cwd(), { query: queryArg });
+  console.log(res.mapMarkdown);
+  console.log(`\n${c.dim}📊 Analyzed ${res.filesCount} source files | ${res.symbolsCount} symbols extracted | ~${res.tokenEstimate} tokens${c.reset}`);
+  process.exit(0);
+}
+
+// 5. Living Memory Bank & Active Task Continuity (Cline Superpower)
+if (args.includes('--memory-bank')) {
+  initMemoryBank(process.cwd(), false);
+  const bank = readMemoryBank(process.cwd());
+  console.log(bank.text);
   process.exit(0);
 }
 

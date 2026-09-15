@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { enforceGitignore } = require('../lib/gitignore');
+const { VERSION, TOOL_NAME } = require('../lib/constants');
 
 console.log('🧪 Running CLI & Idempotency End-to-End Tests...');
 
@@ -14,7 +15,7 @@ const cliPath = path.resolve(__dirname, '../bin/cli.js');
 // 1. --version flag
 {
   const out = execSync(`node "${cliPath}" --version`, { encoding: 'utf8' }).trim();
-  assert(out.includes('OpenGuild v2.6.0'), `Expected v2.6.0, got ${out}`);
+  assert(out.includes(`${TOOL_NAME} v${VERSION}`), `Expected ${TOOL_NAME} v${VERSION}, got ${out}`);
   console.log('  ✔ CLI --version flag verified');
 }
 
@@ -154,11 +155,63 @@ const cliPath = path.resolve(__dirname, '../bin/cli.js');
   assert(fs.existsSync(path.join(tmpDir, '.cursor', 'mcp.json')), 'Must auto-generate cursor mcp.json');
   assert(fs.existsSync(path.join(tmpDir, '.gemini', 'mcp_config.json')), 'Must auto-generate gemini mcp_config.json');
   assert(fs.existsSync(path.join(tmpDir, '.openguild', 'team_memory.md')), 'Must auto-generate team_memory.md');
+  assert(fs.existsSync(path.join(tmpDir, '.openguild', 'active_task.md')), 'Must auto-generate active_task.md');
   assert(fs.existsSync(path.join(tmpDir, 'AGENTS.md')), 'Must auto-generate AGENTS.md');
   const agentsContent = fs.readFileSync(path.join(tmpDir, 'AGENTS.md'), 'utf8');
   assert(agentsContent.includes('Autonomous Pre-Flight Protocol (Zero-Prompt Mandate)'), 'Must include Zero-Prompt Mandate');
   fs.rmSync(tmpDir, { recursive: true, force: true });
   console.log('  ✔ All-In-One Zero-Prompt Setup verified');
+}
+
+// 15. --repomap flag
+{
+  const out = execSync(`node "${cliPath}" --repomap`, { encoding: 'utf8' });
+  assert(out.includes('AST Symbol Repo-Map'), 'Must produce AST repo map');
+  assert(out.includes('Analyzed'), 'Must output analysis summary');
+  console.log('  ✔ CLI --repomap flag verified');
+}
+
+// 16. --memory-bank flag
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'openguild-bank-cli-'));
+  const out = execSync(`node "${cliPath}" --memory-bank`, { cwd: tmpDir, encoding: 'utf8' });
+  assert(out.includes('Living Memory Bank'), 'Must output Living Memory Bank header');
+  assert(out.includes('active_task.md'), 'Must output active_task.md');
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+  console.log('  ✔ CLI --memory-bank flag verified');
+}
+
+// 17. --search flag
+{
+  const out = execSync(`node "${cliPath}" --search "security"`, { encoding: 'utf8' });
+  assert(out.includes('BM25 Hybrid Memory Search'), 'Must run BM25 search');
+  console.log('  ✔ CLI --search flag verified');
+}
+
+// 18. --resolve-conflicts flag
+{
+  const out = execSync(`node "${cliPath}" --resolve-conflicts --dry-run`, { encoding: 'utf8' });
+  assert(out.includes('Memory Conflict & Evolution Audit'), 'Must run conflict audit');
+  console.log('  ✔ CLI --resolve-conflicts flag verified');
+}
+
+// 19. --review flag
+{
+  const out = execSync(`node "${cliPath}" --review "${path.join(__dirname, '../lib/constants.js')}"`, { encoding: 'utf8' });
+  assert(out.includes('OmniGuild Council SOP Review'), 'Must run council review');
+  assert(out.includes('Verdict:'), 'Must produce verdict');
+  console.log('  ✔ CLI --review flag verified');
+}
+
+// 20. --pack flag
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'openguild-pack-cli-'));
+  fs.writeFileSync(path.join(tmpDir, 'test.js'), 'console.log(1);');
+  const out = execSync(`node "${cliPath}" --pack "${tmpDir}"`, { encoding: 'utf8' });
+  assert(out.includes('OmniGuild Codebase Context Bundle'), 'Must run packager');
+  assert(out.includes('Directory Structure'), 'Must include file tree');
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+  console.log('  ✔ CLI --pack flag verified');
 }
 
 console.log('✨ All CLI End-to-End Tests Passed!\n');

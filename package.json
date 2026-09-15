@@ -1,7 +1,7 @@
 {
   "name": "antigravity-guild",
-  "version": "2.6.0",
-  "description": "Zero-config persistent memory, 16-Mind Supreme AGI Council, autonomous auto-analyst, learning engine, and team memory for Antigravity IDE, Cursor, Gemini, and Claude.",
+  "version": "3.0.0",
+  "description": "OmniGuild: The All-In-One AI Developer Engine — 16-Mind Supreme Council, BM25 memory search, AST repo-map, living memory bank, MetaGPT council SOP, and Repomix context packager for Antigravity IDE, Cursor, Gemini, and Claude.",
   "main": "bin/cli.js",
   "bin": {
     "antigravity-guild": "bin/cli.js",
@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "start": "node bin/cli.js",
-    "test": "node tests/detectors.test.js && node tests/generator.test.js && node tests/cli.test.js && node tests/mcp.test.js && node tests/sync.test.js && node tests/editor_config.test.js && node tests/memory_linter.test.js && node tests/team_memory.test.js && node tests/learn.test.js && node tests/ci.test.js && node tests/analyzer.test.js && node tests/token_profiler.test.js && node tests/verifier.test.js && node tests/security_auditor.test.js"
+    "test": "node tests/detectors.test.js && node tests/generator.test.js && node tests/cli.test.js && node tests/mcp.test.js && node tests/sync.test.js && node tests/editor_config.test.js && node tests/memory_linter.test.js && node tests/team_memory.test.js && node tests/learn.test.js && node tests/ci.test.js && node tests/analyzer.test.js && node tests/token_profiler.test.js && node tests/verifier.test.js && node tests/security_auditor.test.js && node tests/repomap.test.js && node tests/memory_bank.test.js && node tests/hybrid_search.test.js && node tests/conflict_resolver.test.js && node tests/council_sop.test.js && node tests/packager.test.js"
   },
   "engines": {
     "node": ">=16.0.0"

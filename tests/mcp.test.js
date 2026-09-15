@@ -11,7 +11,7 @@ console.log('🧪 Running Model Context Protocol (MCP) Server Tests...');
 // 1. Tool Schemas
 {
   assert(Array.isArray(MCP_TOOLS), 'MCP_TOOLS must be an array');
-  assert.strictEqual(MCP_TOOLS.length, 10, 'Must expose 10 MCP tools');
+  assert.strictEqual(MCP_TOOLS.length, 16, 'Must expose 16 MCP tools (one for each Council Mind)');
 
   const names = MCP_TOOLS.map(t => t.name);
   assert(names.includes('openguild_read_memory'));
@@ -24,8 +24,14 @@ console.log('🧪 Running Model Context Protocol (MCP) Server Tests...');
   assert(names.includes('openguild_profile_tokens'));
   assert(names.includes('openguild_verify_invariants'));
   assert(names.includes('openguild_audit_security'));
+  assert(names.includes('openguild_get_repo_map'));
+  assert(names.includes('openguild_read_memory_bank'));
+  assert(names.includes('openguild_update_active_task'));
+  assert(names.includes('openguild_resolve_memory_conflicts'));
+  assert(names.includes('openguild_council_sop_review'));
+  assert(names.includes('openguild_pack_context'));
 
-  console.log('  ✔ MCP Tool Schemas registered correctly');
+  console.log('  ✔ MCP Tool Schemas registered correctly (16/16 Council Tools)');
 }
 
 // 2. Tool Invocations: openguild_read_memory
@@ -136,6 +142,80 @@ console.log('🧪 Running Model Context Protocol (MCP) Server Tests...');
   assert(auditRes.content[0].text.includes('SAIF 2.0 Security Audit'));
 
   console.log('  ✔ openguild_audit_security verified');
+}
+
+// 10. Tool Invocations: openguild_get_repo_map
+{
+  const mapRes = handleToolCall('openguild_get_repo_map', { projectPath: __dirname + '/..', query: 'generateRepoMap' });
+  assert(!mapRes.isError);
+  assert(mapRes.content[0].text.includes('AST Symbol Repo-Map'));
+  assert(mapRes.content[0].text.includes('repomap.js'));
+
+  console.log('  ✔ openguild_get_repo_map verified');
+}
+
+// 11. Tool Invocations: openguild_read_memory_bank & openguild_update_active_task
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'openguild-mcp-bank-'));
+
+  try {
+    // Read non-initialized
+    const uninitRes = handleToolCall('openguild_read_memory_bank', { projectPath: tmpDir });
+    assert(uninitRes.isError);
+
+    // Update active task (auto-inits)
+    const updateRes = handleToolCall('openguild_update_active_task', {
+      projectPath: tmpDir,
+      goal: 'MCP Integration Test',
+      status: 'in_progress',
+      nextSteps: ['Verify tests pass'],
+      notes: 'Testing through MCP handleToolCall',
+    });
+    assert(!updateRes.isError);
+    assert(updateRes.content[0].text.includes('MCP Integration Test'));
+
+    // Read initialized
+    const readRes = handleToolCall('openguild_read_memory_bank', { projectPath: tmpDir });
+    assert(!readRes.isError);
+    assert(readRes.content[0].text.includes('MCP Integration Test'));
+
+    console.log('  ✔ openguild_read_memory_bank & openguild_update_active_task verified');
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
+
+// 12. Tool Invocations: openguild_resolve_memory_conflicts
+{
+  const resolveRes = handleToolCall('openguild_resolve_memory_conflicts', { dryRun: true });
+  assert(!resolveRes.isError);
+  assert(resolveRes.content[0].text.includes('Memory Conflict & Evolution Audit'));
+
+  console.log('  ✔ openguild_resolve_memory_conflicts verified');
+}
+
+// 13. Tool Invocations: openguild_council_sop_review
+{
+  const reviewRes = handleToolCall('openguild_council_sop_review', {
+    code: 'const x = 1; module.exports = { x };',
+    intent: 'Simple constant export',
+  });
+  assert(!reviewRes.isError);
+  assert(reviewRes.content[0].text.includes('OmniGuild Council SOP Review'));
+
+  console.log('  ✔ openguild_council_sop_review verified');
+}
+
+// 14. Tool Invocations: openguild_pack_context
+{
+  const packRes = handleToolCall('openguild_pack_context', {
+    projectPath: __dirname + '/..',
+    maxFiles: 5,
+  });
+  assert(!packRes.isError);
+  assert(packRes.content[0].text.includes('OmniGuild Codebase Context Bundle'));
+
+  console.log('  ✔ openguild_pack_context verified');
 }
 
 console.log('✨ All MCP Server Tests Passed!\n');
