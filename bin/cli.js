@@ -32,6 +32,10 @@ const { startInteractiveHud } = require('../lib/hud');
 const { startDashboard } = require('../lib/dashboard');
 const { runSelfHealing } = require('../lib/healer');
 const { generatePrBlueprint, generateCommitMessage } = require('../lib/pr_architect');
+const { KnowledgeGraph, pageInContext } = require('../lib/knowledge_graph');
+const { handleReproduceCommand } = require('../lib/reproducer');
+const { applyPatch, rollbackLastCheckpoint } = require('../lib/diff_engine');
+const { expandContext } = require('../lib/context_expander');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
@@ -85,6 +89,65 @@ if (args.includes('--commit') || args[0] === 'commit') {
   const prData = generatePrBlueprint({ cwd: process.cwd() });
   const commitMsg = generateCommitMessage(prData.changedFiles, '', customMsg);
   console.log(`${c.green}💡 Suggested Commit Message:${c.reset}\n\n${commitMsg}\n`);
+  process.exit(0);
+}
+
+// 6. Letta L1/L2 Memory Pager & Cognee Semantic Knowledge Graph
+if (args.includes('--graph') || args[0] === 'graph') {
+  const paged = pageInContext('', process.cwd());
+  console.log(paged.l1Context);
+  process.exit(0);
+}
+
+// 7. Devin & SWE-Agent Reproducer Synthesizer
+if (args.includes('--reproduce') || args[0] === 'reproduce') {
+  const repIdx = args.indexOf('--reproduce') !== -1 ? args.indexOf('--reproduce') + 1 : 1;
+  const issueDesc = args[repIdx] && !args[repIdx].startsWith('-') ? args[repIdx] : 'Failing test reproduction';
+  const dryRun = args.includes('--dry-run');
+  const result = handleReproduceCommand(issueDesc, { cwd: process.cwd(), dryRun });
+  console.log(result.message);
+  process.exit(result.status === 'REPRODUCED' ? 0 : 1);
+}
+
+// 8. Aider Surgical Diff Engine Applicator
+if (args.includes('--apply') || args[0] === 'apply') {
+  const applyIdx = args.indexOf('--apply') !== -1 ? args.indexOf('--apply') + 1 : 1;
+  const patchFile = args[applyIdx] && !args[applyIdx].startsWith('-') ? args[applyIdx] : null;
+  if (!patchFile || !fs.existsSync(path.resolve(process.cwd(), patchFile))) {
+    console.error(`${c.red}✖ Patch file not found: ${patchFile || 'unspecified'}${c.reset}`);
+    process.exit(1);
+  }
+  const patchContent = fs.readFileSync(path.resolve(process.cwd(), patchFile), 'utf8');
+  const result = applyPatch(patchContent, { cwd: process.cwd() });
+  if (result.success) {
+    console.log(`${c.green}✔ [Patch Applied]${c.reset} Successfully applied ${result.appliedCount} block(s).`);
+    process.exit(0);
+  } else {
+    console.error(`${c.red}✖ [Patch Failed]${c.reset} Failed on ${result.failedFile || 'patch'}: ${result.error}`);
+    process.exit(1);
+  }
+}
+
+// 9. Safe Git Rollback Checkpoint
+if (args.includes('--undo') || args[0] === 'undo') {
+  const result = rollbackLastCheckpoint(process.cwd());
+  if (result.success) {
+    console.log(`${c.green}✔ [Rollback Complete]${c.reset} ${result.message}`);
+    process.exit(0);
+  } else {
+    console.error(`${c.red}✖ [Rollback Failed]${c.reset} ${result.error || result.message}`);
+    process.exit(1);
+  }
+}
+
+// 10. Cursor & Claude Code Smart @ Context Expander
+if (args.includes('--context') || args[0] === 'context') {
+  const ctxIdx = args.indexOf('--context') !== -1 ? args.indexOf('--context') + 1 : 1;
+  const query = args[ctxIdx] && !args[ctxIdx].startsWith('-') ? args.slice(ctxIdx).filter(a => !a.startsWith('-')).join(' ') : '@git @memory';
+  const maxTokensIdx = args.indexOf('--max-tokens') !== -1 ? args.indexOf('--max-tokens') + 1 : -1;
+  const maxTokens = maxTokensIdx !== -1 && args[maxTokensIdx] ? parseInt(args[maxTokensIdx], 10) : 4000;
+  const expanded = expandContext(query, { cwd: process.cwd(), maxTokens });
+  console.log(expanded.prompt || expanded.expandedMarkdown);
   process.exit(0);
 }
 

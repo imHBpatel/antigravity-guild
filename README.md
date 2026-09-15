@@ -1,8 +1,8 @@
 # ⚡ OmniGuild (`antigravity-guild` / `omniguild`)
 
-> **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with BM25 probabilistic memory, AST repo-mapping, living memory bank, MetaGPT review SOPs, Repomix context packaging, local web dashboard, terminal HUD, self-healing tests, and deterministic invariants.**
+> **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with BM25 probabilistic memory, AST repo-mapping, living memory bank, Letta OS memory paging, Cognee knowledge graph, SWE-agent bug reproducers, Aider surgical diffs, smart @ context expansion, MetaGPT review SOPs, Repomix context packaging, local web dashboard, terminal HUD, self-healing tests, and deterministic invariants.**
 
-[![Version](https://img.shields.io/badge/version-3.1.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-3.2.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
@@ -30,7 +30,7 @@ If you use Cursor, Claude, or Antigravity to write code every day, you know thes
 
 ### ✨ How OmniGuild Fixes This
 
-| Without OmniGuild | With OmniGuild v3.1 |
+| Without OmniGuild | With OmniGuild v3.2 |
 |:---|:---|
 | AI forgets project lessons every time you open a new chat | **Cross-project memory vault** remembers every architectural rule and bugfix forever |
 | 4,500+ tokens burned on monolithic rules per turn | **Lean 770-token base contract** (80-85% token diet) with instant sub-second streaming |
@@ -82,7 +82,7 @@ Your AI assistant will **autonomously**:
 
 ---
 
-## 👑 The 16 Sovereign Superpowers
+## 👑 The 20 Sovereign Superpowers
 
 ### 1. 🧠 Persistent Memory That Actually Learns
 Never repeat yourself to an AI again. Whenever you solve a tricky bug or decide on an architectural rule, teach OmniGuild:
@@ -327,6 +327,67 @@ Generates GitHub Flavored Markdown containing Impacted Files, Multi-Role Council
 
 ---
 
+### 17. 🕸️ Letta (MemGPT) OS Memory Pager & Cognee Semantic Knowledge Graph (`--graph`)
+Solve context window overflow forever with Operating System-grade hierarchical memory paging:
+
+```bash
+# Page in L1 Working RAM context with 1-2 hop knowledge graph neighbors
+npx omniguild --graph
+```
+
+- **L1 Working RAM (~350 tokens):** Keeps active task context and 1-2 hop neighbor symbols hot in fast attention context.
+- **L2 Archival Disk:** Automatically pages out deep repository topology and archival memory documents to local storage.
+- **Semantic Entity-Relationship Graph:** Traverses symbol connections, security rules, and architectural dependencies across files.
+
+---
+
+### 18. 🧪 Devin & SWE-Agent Reproducer Synthesizer (`--reproduce`)
+Adopt the gold standard of autonomous AI engineering: **never fix a bug without reproducing it first.**
+
+```bash
+# Synthesize a hermetic test reproducing an issue and verify it fails (RED state)
+npx omniguild --reproduce "Token refresh fails on expired OAuth grant"
+
+# Preview test synthesis without writing to disk
+npx omniguild --reproduce "JWT payload decoding null pointer" --dry-run
+```
+
+OmniGuild generates a hermetic reproduction test file in `tests/reproduce_issue.test.js`, runs the test runner to verify failure, and requires your code changes to turn the reproducer GREEN before certifying completion.
+
+---
+
+### 19. 🩹 Aider Surgical Diff Engine & 1-Click Rollback (`--apply` / `--undo`)
+Eliminate hallucinated code rewrites and destructive edits with atomic SEARCH/REPLACE diff blocks:
+
+```bash
+# Surgically apply an Aider-format SEARCH/REPLACE block
+npx omniguild --apply changes.patch
+
+# Safely revert tracked changes to previous clean checkpoint (1-click /undo)
+npx omniguild --undo
+```
+
+- **Atomic Matching:** Matches exact lines or normalized CRLF sequences with zero accidental line drift.
+- **Zero Loss:** Checks working tree status before changes and enables instant 1-click rollback if a patch fails invariant checks.
+
+---
+
+### 20. 🎯 Cursor & Claude Code Smart `@` Context Expander (`--context`)
+Synthesize token-budgeted prompt contexts on demand using modern `@` directives:
+
+```bash
+# Expand AST symbols, file line ranges, memory rules, and git state into one prompt
+npx omniguild --context "@symbol:VERSION @file:lib/constants.js#1-25 @memory:security @git"
+```
+
+- `@symbol:name` &mdash; Extracts AST symbol definitions and function signatures from the repo-map.
+- `@file:path#L10-30` &mdash; Slices precise line ranges from project files.
+- `@memory:query` &mdash; Performs BM25 probabilistic search across memory vaults.
+- `@graph:entity` &mdash; Traverses 1-2 hop knowledge graph neighbors.
+- `@git` &mdash; Injects active git diff and modified file status.
+
+---
+
 ## 💡 The Prompt Playbook (Copy & Paste Into Your Chat)
 
 Once OmniGuild is set up, you don't need complex prompting. Copy and paste these **battle-tested prompts** into Cursor, Claude, or Antigravity:
@@ -418,6 +479,11 @@ OmniGuild Sovereign exposes **16 native MCP tools** — 1 dedicated superpower f
 | `npx omniguild --heal` | Run autonomous self-healing test runner and error diagnosis | `npx omniguild --heal` |
 | `npx omniguild --pr` | Generate executive Council PR description from git diff | `npx omniguild --pr` |
 | `npx omniguild --commit [msg]` | Synthesize standardized conventional commit with Council sign-off | `npx omniguild --commit "Fix auth bug"` |
+| `npx omniguild --graph` | Letta L1/L2 memory pager & Cognee knowledge graph | `npx omniguild --graph` |
+| `npx omniguild --reproduce <issue>`| Devin/SWE-agent hermetic bug reproducer synthesizer | `npx omniguild --reproduce "Null token"` |
+| `npx omniguild --apply <patch>` | Aider-style surgical SEARCH/REPLACE diff applicator | `npx omniguild --apply fix.patch` |
+| `npx omniguild --undo` | Safe git rollback to last clean checkpoint | `npx omniguild --undo` |
+| `npx omniguild --context <@query>` | Cursor/Claude Code smart @context expander | `npx omniguild --context "@symbol:auth"` |
 | `npx omniguild --search <query>` | BM25 probabilistic search across all memory vaults | `npx omniguild --search "auth token"` |
 | `npx omniguild --resolve-conflicts` | Audit memory vaults and resolve superseded/conflicting rules | `npx omniguild --resolve-conflicts` |
 | `npx omniguild --repomap [query]` | Print token-dense AST symbol topology across project | `npx omniguild --repomap auth` |

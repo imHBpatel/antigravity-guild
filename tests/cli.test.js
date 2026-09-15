@@ -236,4 +236,60 @@ const cliPath = path.resolve(__dirname, '../bin/cli.js');
   console.log('  ✔ CLI --heal flag verified');
 }
 
+// 24. --graph flag
+{
+  const out = execSync(`node "${cliPath}" --graph`, { encoding: 'utf8' });
+  assert(out.includes('OmniGuild Working Context (L1 RAM)'), 'Must output L1 context');
+  console.log('  ✔ CLI --graph flag verified');
+}
+
+// 25. --reproduce flag (dry run)
+{
+  const out = execSync(`node "${cliPath}" --reproduce "Test reproduction issue" --dry-run`, { encoding: 'utf8' });
+  assert(out.includes('Bug Successfully Reproduced'), 'Must reproduce issue');
+  console.log('  ✔ CLI --reproduce flag verified');
+}
+
+// 26. --apply flag
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'omniguild-cli-apply-'));
+  const testFile = path.join(tmpDir, 'test.js');
+  fs.writeFileSync(testFile, 'const a = 1;\n', 'utf8');
+  const patchFile = path.join(tmpDir, 'test.patch');
+  fs.writeFileSync(patchFile, `### test.js\n<<<<<<< SEARCH\nconst a = 1;\n=======\nconst a = 2;\n>>>>>>> REPLACE\n`, 'utf8');
+
+  const out = execSync(`node "${cliPath}" --apply "${patchFile}"`, { cwd: tmpDir, encoding: 'utf8' });
+  assert(out.includes('[Patch Applied]'), 'Must apply patch');
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+  console.log('  ✔ CLI --apply flag verified');
+}
+
+// 27. --undo flag (in isolated git repo)
+{
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'omniguild-cli-undo-'));
+  execSync('git init', { cwd: tmpDir, stdio: 'ignore' });
+  execSync('git config user.name "Test"', { cwd: tmpDir, stdio: 'ignore' });
+  execSync('git config user.email "test@test.com"', { cwd: tmpDir, stdio: 'ignore' });
+  const testFile = path.join(tmpDir, 'test.txt');
+  fs.writeFileSync(testFile, 'initial\n', 'utf8');
+  execSync('git add test.txt', { cwd: tmpDir, stdio: 'ignore' });
+  execSync('git commit -m "initial commit"', { cwd: tmpDir, stdio: 'ignore' });
+
+  // Modify tracked file
+  fs.writeFileSync(testFile, 'modified\n', 'utf8');
+  const out = execSync(`node "${cliPath}" --undo`, { cwd: tmpDir, encoding: 'utf8' });
+  assert(out.includes('Rollback') || out.includes('Reverted'), 'Must execute rollback');
+  const restored = fs.readFileSync(testFile, 'utf8').trim();
+  assert.strictEqual(restored, 'initial');
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+  console.log('  ✔ CLI --undo flag verified');
+}
+
+// 28. --context flag
+{
+  const out = execSync(`node "${cliPath}" --context "@symbol:VERSION @git"`, { encoding: 'utf8' });
+  assert(out.includes('OmniGuild Expanded Context') || out.includes('Symbol'), 'Must expand context');
+  console.log('  ✔ CLI --context flag verified');
+}
+
 console.log('✨ All CLI End-to-End Tests Passed!\n');
