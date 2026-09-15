@@ -1,8 +1,8 @@
-# ⚡ OmniGuild (`antigravity-guild`)
+# ⚡ OmniGuild (`antigravity-guild` / `omniguild`)
 
-> **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with BM25 probabilistic memory, AST repo-mapping, living memory bank, MetaGPT multi-stage review SOPs, Repomix context packaging, and deterministic invariants.**
+> **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with BM25 probabilistic memory, AST repo-mapping, living memory bank, MetaGPT review SOPs, Repomix context packaging, local web dashboard, terminal HUD, self-healing tests, and deterministic invariants.**
 
-[![Version](https://img.shields.io/badge/version-3.0.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-3.1.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
@@ -10,9 +10,9 @@
 Run one command in any project:
 
 ```bash
-npx antigravity-guild
+npx omniguild
 ```
-*(or `npx openguild`)*
+*(or `npx antigravity-guild` / `npx openguild`)*
 
 Works out-of-the-box with **Antigravity IDE**, **Cursor**, **Claude Desktop**, **VS Code**, **Windsurf**, and **Gemini**.
 
@@ -30,7 +30,7 @@ If you use Cursor, Claude, or Antigravity to write code every day, you know thes
 
 ### ✨ How OmniGuild Fixes This
 
-| Without OmniGuild | With OmniGuild v3.0 |
+| Without OmniGuild | With OmniGuild v3.1 |
 |:---|:---|
 | AI forgets project lessons every time you open a new chat | **Cross-project memory vault** remembers every architectural rule and bugfix forever |
 | 4,500+ tokens burned on monolithic rules per turn | **Lean 770-token base contract** (80-85% token diet) with instant sub-second streaming |
@@ -39,6 +39,8 @@ If you use Cursor, Claude, or Antigravity to write code every day, you know thes
 | Secrets, API keys, and raw `eval()` leak into code | **Built-in SAIF 2.0 Security Auditor** catches credentials and hazards before you commit |
 | Single-shot code generation misses architectural flaws | **MetaGPT-style 4-stage Council SOP** conducts sequential Architect, Security, QA, and UX review |
 | Manual copying of files causes context truncation & leaks | **Repomix-style packager** generates clean token-budgeted bundles with secret scrubbing |
+| Test failures require manual debugging loops | **Autonomous Self-Healing runner** classifies errors and synthesizes surgical patches |
+| Opening PRs requires manual writeups | **Council PR Architect** formats GitHub PR descriptions with Council sign-offs |
 
 ---
 
@@ -50,7 +52,7 @@ Navigate to **any project on your computer** and run **one single command**:
 
 ```bash
 cd your-project
-npx antigravity-guild
+npx omniguild
 ```
 
 ### 🍎 What OmniGuild Does Automatically in 1 Second (99.99% Done):
@@ -80,14 +82,14 @@ Your AI assistant will **autonomously**:
 
 ---
 
-## 👑 The 12 Sovereign Superpowers
+## 👑 The 16 Sovereign Superpowers
 
 ### 1. 🧠 Persistent Memory That Actually Learns
 Never repeat yourself to an AI again. Whenever you solve a tricky bug or decide on an architectural rule, teach OmniGuild:
 
 ```bash
 # Save an insight to your global memory (available across all your projects)
-npx antigravity-guild --learn "Always set Content-Type header on custom fetch calls" --category architecture
+npx omniguild --learn "Always set Content-Type header on custom fetch calls" --category architecture
 
 # Or teach it directly inside your chat with Cursor or Claude:
 # "Remember: We always use zod to parse inbound request bodies in this project."
@@ -103,7 +105,7 @@ Monolithic prompts slow down your AI and cost money. OmniGuild keeps base instru
 Run the profiler anytime to see your token weight and savings:
 
 ```bash
-npx antigravity-guild --tokens
+npx omniguild --tokens
 ```
 
 **Example Output:**
@@ -122,7 +124,7 @@ Efficiency Grade: A+ (🟢 Highly Optimized)
 Have a rough idea but aren't sure how to architect it? The Auto-Analyst turns raw concepts into full production-grade blueprints in seconds:
 
 ```bash
-npx antigravity-guild --analyze "A self-hosted bookmark manager with AI auto-tagging and offline search"
+npx omniguild --analyze "A self-hosted bookmark manager with AI auto-tagging and offline search"
 ```
 
 **What it generates:**
@@ -139,10 +141,10 @@ Stop trusting an AI that says *"Everything is done and working!"* when tests are
 
 ```bash
 # Verify tests, linter, types, memory integrity, and git hygiene in one command
-npx antigravity-guild --verify
+npx omniguild --verify
 
 # Auto-fix memory duplicates and missing .gitignore rules
-npx antigravity-guild --verify --fix
+npx omniguild --verify --fix
 ```
 
 It executes your project's native test commands (`npm test`, `pytest`, `cargo test`, `go test`) and outputs a certified invariant proof.
@@ -153,7 +155,7 @@ It executes your project's native test commands (`npm test`, `pytest`, `cargo te
 Scan your repository for secret leaks, hardcoded credentials, and high-risk code patterns before pushing to production:
 
 ```bash
-npx antigravity-guild --audit
+npx omniguild --audit
 ```
 
 **What it catches:**
@@ -170,7 +172,7 @@ Assigns an institutional grade (**A+ to F**) with exact filenames, line numbers,
 Ensure every developer on your team gets the exact same high-quality AI output:
 
 ```bash
-npx antigravity-guild --team
+npx omniguild --team
 ```
 
 Creates a version-controlled `.openguild/` folder containing `team_memory.md` and `architecture_decisions.md`. When teammates pull the repo, their AI assistants automatically inherit all team decisions.
@@ -182,10 +184,10 @@ Reading entire source files burns thousands of tokens. OmniGuild's native AST sy
 
 ```bash
 # Print complete repo topology
-npx antigravity-guild --repomap
+npx omniguild --repomap
 
 # Query-filter symbols (e.g. find all auth or database functions)
-npx antigravity-guild --repomap auth
+npx omniguild --repomap auth
 ```
 
 Your AI assistant can also query this map dynamically during chat turns via the `openguild_get_repo_map` MCP tool to inspect project structure without wasting context.
@@ -196,7 +198,7 @@ Your AI assistant can also query this map dynamically during chat turns via the 
 Eliminate session amnesia between chat turns. OmniGuild maintains a living task and context state engine in `.openguild/`:
 
 ```bash
-npx antigravity-guild --memory-bank
+npx omniguild --memory-bank
 ```
 
 - **`active_task.md`**: Living record of current goals, status, constraints, next steps, and session notes.
@@ -212,7 +214,7 @@ Naive keyword matching fails when wording differs. OmniGuild includes a pure Nod
 
 ```bash
 # Probabilistic search ranked by relevance score
-npx antigravity-guild --search "JWT RS256 rotation"
+npx omniguild --search "JWT RS256 rotation"
 ```
 
 **Example Output:**
@@ -231,7 +233,7 @@ When engineering practices evolve (e.g. migrating from Jest to Vitest or REST to
 
 ```bash
 # Audit memory consistency and preview/resolve superseded rules
-npx antigravity-guild --resolve-conflicts
+npx omniguild --resolve-conflicts
 ```
 
 Obsolete entries are safely annotated as `[SUPERSEDED]` rather than erased, preserving historical ADRs while giving your AI crystal-clear guidance.
@@ -243,7 +245,7 @@ Single-turn code generation often introduces subtle architecture or security bug
 
 ```bash
 # Review a specific file or all project files
-npx antigravity-guild --review src/auth/jwt.js
+npx omniguild --review src/auth/jwt.js
 ```
 
 **The 4 Sequential Stages:**
@@ -261,16 +263,67 @@ When sharing code context with AI models, manual copying is tedious, error-prone
 
 ```bash
 # Package project with an ASCII directory tree, token estimation, and auto secret scrubbing
-npx antigravity-guild --pack
+npx omniguild --pack
 
 # Package a specific directory and write to a custom file
-npx antigravity-guild --pack src/ --output context_bundle.md
+npx omniguild --pack src/ --output context_bundle.md
 ```
 
 **Packager Guarantees:**
 - **Zero Secret Exposure:** Automatically strips API keys, OAuth tokens, and `.env` credentials before bundling.
 - **Noise Exclusions:** Excludes `.git`, `node_modules`, `dist`, binary files, and lockfiles.
 - **Token Profiling:** Computes exact file counts, character counts, and estimated token usage.
+
+---
+
+### 13. 🖥️ Interactive Apple-Grade Terminal HUD (`--ui` / `-u`)
+When you want a visual interactive cockpit in your terminal without typing flags:
+
+```bash
+npx omniguild --ui
+```
+
+Features responsive arrow/number navigation, instant type-to-search across memory vaults, AST symbol browsing, and 1-click execution of Council reviews and context packaging.
+
+---
+
+### 14. 🌐 Zero-Dependency Local Web Visualizer Dashboard (`--dashboard`)
+Launch an instant, offline-capable dark mode browser interface on `http://localhost:4321`:
+
+```bash
+npx omniguild --dashboard
+```
+
+- **Interactive 16-Mind Council Chamber:** Review council domains and simulate multi-agent debates.
+- **Live BM25 Memory Search:** Interactive search bar with real-time confidence scores.
+- **AST Repo-Map Viewer:** Browse project symbols and file hierarchies visually.
+- **Token Diet & Cost Calculator:** Calculate exact dollar and token savings.
+
+---
+
+### 15. 🧬 Autonomous Self-Healing Test Runner & Diagnoser (`--heal`)
+Stop guessing why tests failed:
+
+```bash
+npx omniguild --heal
+```
+
+Captures runtime failures, classifies root-cause error types (Assertion Mismatches, Syntax Errors, Missing Modules, Null Pointer Exceptions), extracts exact files and lines, suggests minimal surgical patches, and auto-records lessons into memory.
+
+---
+
+### 16. 📝 Council PR & Commit Architect (`--pr` / `--commit`)
+Streamline pull requests and commit hygiene with institutional Council sign-offs:
+
+```bash
+# Generate executive GitHub PR description from git diff
+npx omniguild --pr
+
+# Synthesize standardized conventional commit message
+npx omniguild --commit "Add user authentication middleware"
+```
+
+Generates GitHub Flavored Markdown containing Impacted Files, Multi-Role Council sign-offs (Architecture, SAIF Security, QA Invariants), test proofs, and conventional commits.
 
 ---
 
@@ -359,28 +412,33 @@ OmniGuild Sovereign exposes **16 native MCP tools** — 1 dedicated superpower f
 
 | Command / Flag | Purpose | Example |
 |:---|:---|:---|
-| `npx antigravity-guild` | Initialize or update OmniGuild in current project | `npx antigravity-guild` |
-| `npx antigravity-guild --search <query>` | BM25 probabilistic search across all memory vaults | `npx antigravity-guild --search "auth token"` |
-| `npx antigravity-guild --resolve-conflicts` | Audit memory vaults and resolve superseded/conflicting rules | `npx antigravity-guild --resolve-conflicts` |
-| `npx antigravity-guild --repomap [query]` | Print token-dense AST symbol topology across project | `npx antigravity-guild --repomap auth` |
-| `npx antigravity-guild --memory-bank` | Inspect living active task context and patterns | `npx antigravity-guild --memory-bank` |
-| `npx antigravity-guild --review [file]` | Run MetaGPT-style 4-stage Council SOP code review | `npx antigravity-guild --review lib/auth.js` |
-| `npx antigravity-guild --pack [path] [--output file]` | Repomix-style codebase packager with secret scrubbing | `npx antigravity-guild --pack src/ --output context.md` |
-| `npx antigravity-guild --preset <name>` | Use a targeted preset (`full`, `agi`, `backend`, `web`, `mobile`, `ai-ml`) | `npx antigravity-guild --preset backend` |
-| `npx antigravity-guild --setup-mcp [editor]` | 1-Click configure MCP for `cursor`, `claude`, `antigravity`, or `all` | `npx antigravity-guild --setup-mcp all` |
-| `npx antigravity-guild --tokens` | Benchmark context token consumption and cost savings | `npx antigravity-guild --tokens` |
-| `npx antigravity-guild --verify [--fix]` | Run unified tests, lint, typecheck, and memory check | `npx antigravity-guild --verify --fix` |
-| `npx antigravity-guild --audit` | Scan project for secret leaks and code vulnerabilities | `npx antigravity-guild --audit` |
-| `npx antigravity-guild --analyze "<idea>"` | Auto-generate comprehensive architecture blueprint | `npx antigravity-guild --analyze "Real-time sync engine"` |
-| `npx antigravity-guild --learn "<insight>"` | Record an engineering lesson with secret scrubbing | `npx antigravity-guild --learn "Use redis locks for queue jobs"` |
-| `npx antigravity-guild --team` | Initialize Git-shared team memory in `.openguild/` | `npx antigravity-guild --team` |
-| `npx antigravity-guild --setup-ci` | Generate GitHub Actions Council Review workflow | `npx antigravity-guild --setup-ci` |
-| `npx antigravity-guild --lint-memory [--fix]` | Clean duplicate rules and format memory vault | `npx antigravity-guild --lint-memory --fix` |
-| `npx antigravity-guild --status` | Inspect active memory files, council status, and stats | `npx antigravity-guild --status` |
-| `npx antigravity-guild --export-memory` | Backup memory vault to JSON file | `npx antigravity-guild --export-memory backup.json` |
-| `npx antigravity-guild --import-memory <file>`| Restore or merge memory vault from JSON backup | `npx antigravity-guild --import-memory backup.json` |
-| `npx antigravity-guild --install-hooks` | Install Git pre-commit invariant verification hook | `npx antigravity-guild --install-hooks` |
-| `npx antigravity-guild --dry-run` | Preview actions without modifying disk | `npx antigravity-guild --dry-run` |
+| `npx omniguild` | Initialize or update OmniGuild in current project | `npx omniguild` |
+| `npx omniguild -u, --ui` | Launch interactive Apple-grade terminal HUD dashboard | `npx omniguild --ui` |
+| `npx omniguild --dashboard` | Launch local zero-dependency web visualizer dashboard | `npx omniguild --dashboard` |
+| `npx omniguild --heal` | Run autonomous self-healing test runner and error diagnosis | `npx omniguild --heal` |
+| `npx omniguild --pr` | Generate executive Council PR description from git diff | `npx omniguild --pr` |
+| `npx omniguild --commit [msg]` | Synthesize standardized conventional commit with Council sign-off | `npx omniguild --commit "Fix auth bug"` |
+| `npx omniguild --search <query>` | BM25 probabilistic search across all memory vaults | `npx omniguild --search "auth token"` |
+| `npx omniguild --resolve-conflicts` | Audit memory vaults and resolve superseded/conflicting rules | `npx omniguild --resolve-conflicts` |
+| `npx omniguild --repomap [query]` | Print token-dense AST symbol topology across project | `npx omniguild --repomap auth` |
+| `npx omniguild --memory-bank` | Inspect living active task context and patterns | `npx omniguild --memory-bank` |
+| `npx omniguild --review [file]` | Run MetaGPT-style 4-stage Council SOP code review | `npx omniguild --review lib/auth.js` |
+| `npx omniguild --pack [path]` | Repomix-style codebase packager with secret scrubbing | `npx omniguild --pack src/` |
+| `npx omniguild --preset <name>` | Use a targeted preset (`full`, `agi`, `backend`, `web`, `mobile`, `ai-ml`) | `npx omniguild --preset backend` |
+| `npx omniguild --setup-mcp [editor]` | 1-Click configure MCP for `cursor`, `claude`, `antigravity`, or `all` | `npx omniguild --setup-mcp all` |
+| `npx omniguild --tokens` | Benchmark context token consumption and cost savings | `npx omniguild --tokens` |
+| `npx omniguild --verify [--fix]` | Run unified tests, lint, typecheck, and memory check | `npx omniguild --verify --fix` |
+| `npx omniguild --audit` | Scan project for secret leaks and code vulnerabilities | `npx omniguild --audit` |
+| `npx omniguild --analyze "<idea>"` | Auto-generate comprehensive architecture blueprint | `npx omniguild --analyze "Real-time sync engine"` |
+| `npx omniguild --learn "<insight>"` | Record an engineering lesson with secret scrubbing | `npx omniguild --learn "Use redis locks for queue jobs"` |
+| `npx omniguild --team` | Initialize Git-shared team memory in `.openguild/` | `npx omniguild --team` |
+| `npx omniguild --setup-ci` | Generate GitHub Actions Council Review workflow | `npx omniguild --setup-ci` |
+| `npx omniguild --lint-memory [--fix]` | Clean duplicate rules and format memory vault | `npx omniguild --lint-memory --fix` |
+| `npx omniguild --status` | Inspect active memory files, council status, and stats | `npx omniguild --status` |
+| `npx omniguild --export-memory` | Backup memory vault to JSON file | `npx omniguild --export-memory backup.json` |
+| `npx omniguild --import-memory <file>`| Restore or merge memory vault from JSON backup | `npx omniguild --import-memory backup.json` |
+| `npx omniguild --install-hooks` | Install Git pre-commit invariant verification hook | `npx omniguild --install-hooks` |
+| `npx omniguild --dry-run` | Preview actions without modifying disk | `npx omniguild --dry-run` |
 
 ---
 
@@ -402,7 +460,7 @@ OmniGuild Sovereign exposes **16 native MCP tools** — 1 dedicated superpower f
 Global memory lives in `~/.openguild/memory/` on your machine (`C:\Users\<User>\.openguild\memory` on Windows). It is organized into clean markdown files (`institutional_memory.md`, `security_standards.md`, `user_profile.md`) that you can inspect and edit anytime.
 
 ### How do I share memory with my teammates?
-Run `npx antigravity-guild --team`. This creates a `.openguild/` folder inside your repository. Commit this folder to Git. Any teammate who pulls the repository will automatically share project architecture decisions and team standards.
+Run `npx omniguild --team`. This creates a `.openguild/` folder inside your repository. Commit this folder to Git. Any teammate who pulls the repository will automatically share project architecture decisions and team standards.
 
 ### Can I use OmniGuild with existing projects?
 **Yes.** OmniGuild was designed specifically for existing, mature codebases. It automatically detects your package manager, test scripts, and directory layout without breaking existing workflows.

@@ -28,13 +28,67 @@ const { searchMemoryVaults } = require('../lib/hybrid_search');
 const { resolveAllVaultConflicts } = require('../lib/conflict_resolver');
 const { runCouncilSop } = require('../lib/council_sop');
 const { packCodebase } = require('../lib/packager');
+const { startInteractiveHud } = require('../lib/hud');
+const { startDashboard } = require('../lib/dashboard');
+const { runSelfHealing } = require('../lib/healer');
+const { generatePrBlueprint, generateCommitMessage } = require('../lib/pr_architect');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
 // ---------------------------------------------------------------------------
 const args = process.argv.slice(2);
 
-// 1. MCP Server Subcommand (Zero-overhead stdio)
+// 1. Interactive Terminal HUD (Apple-Grade TUI)
+if (args.includes('--ui') || args.includes('-u') || args[0] === 'ui') {
+  startInteractiveHud({ cwd: process.cwd() });
+  return;
+}
+
+// 2. Local Zero-Dependency Web Visualizer Dashboard
+if (args.includes('--dashboard') || args.includes('--web') || args[0] === 'dashboard') {
+  startDashboard({ cwd: process.cwd(), openBrowser: !args.includes('--no-open') }).then(dash => {
+    console.log(`\n${c.green}🌐 [Dashboard Running]${c.reset} ${c.bold}${dash.url}${c.reset}`);
+    console.log(`${c.dim}Press Ctrl+C to stop the dashboard server.${c.reset}\n`);
+  }).catch(err => {
+    console.error(`${c.red}✖ Failed to start dashboard: ${err.message}${c.reset}`);
+    process.exit(1);
+  });
+  return;
+}
+
+// 3. Autonomous Self-Healing Test Runner
+if (args.includes('--heal') || args[0] === 'heal') {
+  const cmdIdx = args.indexOf('--test-cmd') !== -1 ? args.indexOf('--test-cmd') + 1 : -1;
+  const customCmd = cmdIdx !== -1 && args[cmdIdx] && !args[cmdIdx].startsWith('-') ? args[cmdIdx] : null;
+  const healResult = runSelfHealing({ cwd: process.cwd(), testCmd: customCmd });
+  console.log(`\n# 🧬 OmniGuild Self-Healing Test Runner: ${healResult.status}`);
+  console.log(healResult.message);
+  if (healResult.diagnosis) {
+    console.log(`\n- Error Type: ${healResult.diagnosis.errorType}`);
+    console.log(`- File: ${healResult.diagnosis.failingFile}:${healResult.diagnosis.lineNumber || '?'}`);
+    console.log(`- Suggestion: ${healResult.diagnosis.suggestion}`);
+  }
+  process.exit(healResult.healed ? 0 : 1);
+}
+
+// 4. Council PR Architect
+if (args.includes('--pr') || args[0] === 'pr') {
+  const prResult = generatePrBlueprint({ cwd: process.cwd() });
+  console.log(prResult.markdown);
+  process.exit(0);
+}
+
+// 5. Conventional Commit Generator
+if (args.includes('--commit') || args[0] === 'commit') {
+  const commitIdx = args.indexOf('--commit') !== -1 ? args.indexOf('--commit') + 1 : 1;
+  const customMsg = args[commitIdx] && !args[commitIdx].startsWith('-') ? args[commitIdx] : '';
+  const prData = generatePrBlueprint({ cwd: process.cwd() });
+  const commitMsg = generateCommitMessage(prData.changedFiles, '', customMsg);
+  console.log(`${c.green}💡 Suggested Commit Message:${c.reset}\n\n${commitMsg}\n`);
+  process.exit(0);
+}
+
+// 6. MCP Server Subcommand (Zero-overhead stdio)
 if (args[0] === 'mcp') {
   startMcpServer();
   return;

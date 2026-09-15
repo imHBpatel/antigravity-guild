@@ -214,4 +214,26 @@ const cliPath = path.resolve(__dirname, '../bin/cli.js');
   console.log('  ✔ CLI --pack flag verified');
 }
 
+// 21. --pr flag
+{
+  const out = execSync(`node "${cliPath}" --pr`, { encoding: 'utf8' });
+  assert(out.includes('Summary of Changes'), 'Must output PR summary');
+  assert(out.includes('Multi-Role Council Sign-Offs'), 'Must output Council sign-offs');
+  console.log('  ✔ CLI --pr flag verified');
+}
+
+// 22. --commit flag
+{
+  const out = execSync(`node "${cliPath}" --commit "test commit message"`, { encoding: 'utf8' });
+  assert(out.includes('Suggested Commit Message:'), 'Must output suggested commit message');
+  console.log('  ✔ CLI --commit flag verified');
+}
+
+// 23. --heal flag
+{
+  const out = execSync(`node "${cliPath}" --heal --test-cmd "node -e process.exit(0)"`, { encoding: 'utf8' });
+  assert(out.includes('OmniGuild Self-Healing Test Runner: GREEN'), 'Must run self healing test runner');
+  console.log('  ✔ CLI --heal flag verified');
+}
+
 console.log('✨ All CLI End-to-End Tests Passed!\n');
