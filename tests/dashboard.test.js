@@ -42,13 +42,14 @@ console.log('🧪 Running Web Visualizer & Dashboard Tests...');
     assert.strictEqual(rootRes.statusCode, 200);
     assert(rootRes.headers['content-type'].includes('text/html'));
     assert(rootRes.body.includes('OmniGuild'));
-    console.log('  ✔ GET / serves HTML SPA');
+    assert(rootRes.body.includes('Voice JARVIS'));
+    console.log('  ✔ GET / serves HTML SPA with Voice JARVIS');
 
     // Test /api/status
     const statusRes = await httpGet('/api/status');
     assert.strictEqual(statusRes.statusCode, 200);
     const statusData = JSON.parse(statusRes.body);
-    assert.strictEqual(statusData.version, '3.1.0');
+    assert.strictEqual(statusData.version, '4.2.0');
     assert(statusData.stack !== undefined);
     assert(statusData.vault !== undefined);
     console.log('  ✔ GET /api/status returns JSON project metadata');

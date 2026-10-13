@@ -55,6 +55,9 @@ const { runMockApi } = require('../lib/mock_api_server');
 const { runProjectPulse } = require('../lib/project_pulse');
 const { runScaffold } = require('../lib/scaffolder');
 const { executeIntent } = require('../lib/intent_router');
+const { fuzzModule, formatFuzzReport } = require('../lib/chaos_fuzzer');
+const { benchmarkModule, formatBenchmarkReport } = require('../lib/perf_benchmarker');
+const { generateDeploySpec } = require('../lib/cloud_deployer');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
@@ -107,6 +110,52 @@ if (args[0] === 'do') {
 
   const result = executeIntent(prompt, process.cwd());
   process.exit(result.allSuccess ? 0 : 1);
+}
+
+// 38. Chaos Engineering Fuzzer
+if (args[0] === 'fuzz' || args.includes('--fuzz')) {
+  const fuzzIdx = args.indexOf('--fuzz') !== -1 ? args.indexOf('--fuzz') + 1 : 1;
+  const targetFile = args[fuzzIdx] && !args[fuzzIdx].startsWith('-') ? args[fuzzIdx] : path.join(process.cwd(), 'lib', 'scaffolder.js');
+  try {
+    const result = fuzzModule(targetFile);
+    console.log(formatFuzzReport(result));
+    process.exit(result.success && result.averageResilienceScore >= 70 ? 0 : 1);
+  } catch (err) {
+    console.error(`${c.red}✖ Fuzz Error: ${err.message}${c.reset}`);
+    process.exit(1);
+  }
+}
+
+// 39. Nanosecond Performance Benchmarker
+if (args[0] === 'benchmark' || args.includes('--benchmark') || args.includes('--bench')) {
+  const benchIdx = args.indexOf('--benchmark') !== -1 ? args.indexOf('--benchmark') + 1 : (args.indexOf('--bench') !== -1 ? args.indexOf('--bench') + 1 : 1);
+  const targetFile = args[benchIdx] && !args[benchIdx].startsWith('-') ? args[benchIdx] : path.join(process.cwd(), 'lib', 'constants.js');
+  try {
+    const result = benchmarkModule(targetFile);
+    console.log(formatBenchmarkReport(result));
+    process.exit(0);
+  } catch (err) {
+    console.error(`${c.red}✖ Benchmark Error: ${err.message}${c.reset}`);
+    process.exit(1);
+  }
+}
+
+// 40. 1-Click Zero-Config Cloud Deployer
+if (args[0] === 'deploy-spec' || args.includes('--deploy-spec') || args[0] === 'deploy') {
+  const typeIdx = (args.indexOf('deploy-spec') !== -1 || args.indexOf('deploy') !== -1) ? 1 : args.indexOf('--deploy-spec') + 1;
+  const targetType = args[typeIdx] && !args[typeIdx].startsWith('-') ? args[typeIdx] : 'all';
+  try {
+    const result = generateDeploySpec(process.cwd(), targetType);
+    console.log(`\n${c.bold}🚀 OmniGuild Zero-Config Cloud Deployer${c.reset}`);
+    console.log(`  ${c.green}✔ Synthesized ${result.generatedFiles.length} production deployment manifests in ${result.rootDir}${c.reset}\n`);
+    for (const f of result.generatedFiles) {
+      console.log(`  📄 ${f}`);
+    }
+    process.exit(0);
+  } catch (err) {
+    console.error(`${c.red}✖ Deploy Spec Error: ${err.message}${c.reset}`);
+    process.exit(1);
+  }
 }
 
 // 26. Temporal Memory Timeline

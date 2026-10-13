@@ -3,12 +3,12 @@
 > **Your Personal Engineering JARVIS & 16-Mind Supreme AI Council.**  
 > Turn any AI assistant or terminal into an elite, multi-role Big Tech engineering organization. Engineered with the **internet-scale architectural rigor of a Google CTO**, the **uncompromising aesthetic simplicity of an Apple CTO**, and the **constitutional safety of Anthropic**.
 
-[![Version](https://img.shields.io/badge/version-4.1.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-4.2.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Security Grade](https://img.shields.io/badge/SAIF%202.0-Grade%20A%2B%20Hardened-brightgreen.svg?style=flat-square)](lib/security_auditor.js)
-[![Test Suites](https://img.shields.io/badge/tests-45%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
+[![Test Suites](https://img.shields.io/badge/tests-48%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
 
 ```bash
 # Run one command in any project on your computer:
@@ -232,16 +232,52 @@ omniguild run "Implement rate limiting middleware on custom fetch calls"
 
 ---
 
-### 8. 🖥️ The Local Visual Cockpit & Terminal HUD
-**The Problem:** Developers want to inspect their repository health, memory graphs, and council roles visually without opening cloud portals.  
-**The Solution:** Dual interfaces (Web Dashboard on `:4321` and Terminal TUI HUD) running 100% locally with zero external dependencies.
+### 8. 🎙️ The Voice-Interactive JARVIS & Visual Cockpit (`omniguild --dashboard`)
+**The Problem:** Developers experience typing fatigue and want hands-free interaction with their repositories.  
+**The Solution:** Dual interfaces (Web Dashboard on `:4321` and Terminal HUD) with browser-native **Web Speech API** integration.
 
 ```bash
-# Launch zero-dependency local browser dashboard:
+# Launch local dashboard with interactive Voice JARVIS Orb:
 omniguild --dashboard
 
 # Or launch interactive Apple-grade terminal HUD:
 omniguild --ui
+```
+
+- **Voice JARVIS Mode:** Click the glowing Apple-grade Orb and speak: *"Audit security and verify all tests."* OmniGuild plans the execution DAG, runs the tests, and speaks back via speech synthesis: *"Execution complete. All 48 invariants satisfied, Captain."*
+- **Live Memory Search:** Probabilistic BM25 Okapi queries executed with real-time UI relevance scoring.
+- **AST Symbol Explorer:** Visual symbol navigation across JS/TS, Python, Go, and Rust.
+
+---
+
+### 9. ⚡ Chaos Engineering & Negative Input Fuzzer (`omniguild fuzz <file>`)
+**The Problem:** Most AI tools only test the happy path; malicious inputs or weird boundary conditions cause production server crashes.  
+**The Solution:** Injects 24 chaos mutation payloads (prototype pollution, SQL injection strings, unicode homoglyphs, memory overflows) into your code to verify defensive error boundaries.
+
+```bash
+omniguild fuzz lib/scaffolder.js
+# Output: Grade A+ (Hardened Sovereign) — 100% Resilience across 24 chaotic payloads
+```
+
+---
+
+### 10. 🏎️ Nanosecond Performance Benchmarker (`omniguild benchmark <file>`)
+**The Problem:** AI assistants frequently generate $O(n^2)$ loops or memory leaks without developers noticing.  
+**The Solution:** High-precision micro-benchmarking using `process.hrtime.bigint()` measuring ops/sec, p50/p95/p99 latency, and heap memory footprint.
+
+```bash
+omniguild benchmark lib/constants.js
+# Output: 1,815,871 ops/sec (p99: 2.1µs) — Grade A+ (Ultra Low Latency)
+```
+
+---
+
+### 11. 🚀 1-Click Zero-Config Cloud Deployer (`omniguild deploy-spec [target]`)
+**The Problem:** Bridging the gap between code on your laptop and a live URL on the internet is complex and error-prone.  
+**The Solution:** Scaffolds multi-stage production Dockerfile, Cloudflare Worker edge shims, Vercel serverless routing, and GitHub Actions CD pipelines in 1 second.
+
+```bash
+omniguild deploy-spec all
 ```
 
 ---
@@ -300,18 +336,21 @@ OmniGuild exposes 20 native MCP tools directly to your editor (Cursor, Claude De
 
 ---
 
-## ⚙️ The Complete 37 Superpowers CLI Cheat Sheet
+## ⚙️ The Complete 40 Superpowers CLI Cheat Sheet
 
 | Command / Flag | Purpose | Example |
 |:---|:---|:---|
 | `omniguild do "<instruction>"` | **Natural-Language Intent Router:** speaks plain English | `omniguild do "audit security and verify tests"` |
 | `omniguild scaffold <type> <name>` | **1-Click Feature Scaffolder:** APIs, UI, tests | `omniguild scaffold api users` |
+| `omniguild fuzz [file]` | **Chaos Engineering Fuzzer:** 24 negative boundary payloads | `omniguild fuzz lib/scaffolder.js` |
+| `omniguild benchmark [file]` | **Nanosecond Benchmarker:** ops/sec, p99 latency, heap delta | `omniguild benchmark lib/constants.js` |
+| `omniguild deploy-spec [target]` | **1-Click Cloud Deployer:** Docker, Cloudflare, Vercel | `omniguild deploy-spec all` |
+| `omniguild --dashboard` | Local visual cockpit with **Voice JARVIS Mode** (:4321) | `omniguild --dashboard` |
 | `omniguild run "<goal>"` | Autonomous Devin Plan-Act-Verify agent loop | `omniguild run "add email validation"` |
 | `omniguild --verify [--fix]` | Deterministic verification gate (tests + lint + types) | `omniguild --verify --fix` |
 | `omniguild --audit` | SAIF 2.0 Security Audit (Grade A+ to F) | `omniguild --audit` |
 | `omniguild --pulse` | Project Pulse: unified health score across code & tests | `omniguild --pulse` |
 | `omniguild -u, --ui` | Interactive Apple-grade terminal HUD | `omniguild --ui` |
-| `omniguild --dashboard` | Local zero-dependency dark-mode web visualizer | `omniguild --dashboard` |
 | `omniguild --heal` | Autonomous self-healing test runner and patch generator | `omniguild --heal` |
 | `omniguild --timeline` | Temporal memory timeline with freshness decay | `omniguild --timeline` |
 | `omniguild --debt` | Tech debt radar: cyclomatic complexity & dead code | `omniguild --debt` |
