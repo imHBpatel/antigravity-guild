@@ -36,11 +36,263 @@ const { KnowledgeGraph, pageInContext } = require('../lib/knowledge_graph');
 const { handleReproduceCommand } = require('../lib/reproducer');
 const { applyPatch, rollbackLastCheckpoint } = require('../lib/diff_engine');
 const { expandContext } = require('../lib/context_expander');
+const { runAutonomousAgent } = require('../lib/agent_loop');
+const { synthesizeTestSuite } = require('../lib/test_generator');
+const { generateArchitectureDocs } = require('../lib/doc_architect');
+const { generateChangelog } = require('../lib/changelog_architect');
+const { startSyncServer, pullFromRemote, pushToRemote } = require('../lib/team_sync_server');
+
+// v4.0 — The Adoration Update: 10 New Superpowers
+const { runTemporalTimeline } = require('../lib/temporal_memory');
+const { runTechDebtRadar } = require('../lib/tech_debt_radar');
+const { explainError } = require('../lib/error_explainer');
+const { runDepScan } = require('../lib/dep_scanner');
+const { generateSbom } = require('../lib/sbom_generator');
+const { runMigration, listTransforms } = require('../lib/migration_engine');
+const { runVault } = require('../lib/secrets_vault');
+const { findRegression } = require('../lib/regression_finder');
+const { runMockApi } = require('../lib/mock_api_server');
+const { runProjectPulse } = require('../lib/project_pulse');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
 // ---------------------------------------------------------------------------
 const args = process.argv.slice(2);
+
+// ─── v4.0 Superpower CLI Routes ──────────────────────────────────────
+
+// 26. Temporal Memory Timeline
+if (args.includes('--timeline') || args[0] === 'timeline') {
+  const result = runTemporalTimeline(process.cwd());
+  console.log(result.report);
+  process.exit(0);
+}
+
+// 27. Tech Debt Radar
+if (args.includes('--debt') || args[0] === 'debt') {
+  const result = runTechDebtRadar(process.cwd());
+  console.log(result.report);
+  process.exit(0);
+}
+
+// 28. Stack Trace Decoder & Error Explainer
+if (args.includes('--explain') || args[0] === 'explain') {
+  const errorIdx = args.indexOf('--explain') !== -1 ? args.indexOf('--explain') + 1 : 1;
+  let errorText = args.slice(errorIdx).filter(a => !a.startsWith('-')).join(' ');
+  // If no inline error text, read from stdin
+  if (!errorText) {
+    try {
+      errorText = fs.readFileSync(0, 'utf8'); // Read from pipe
+    } catch (_) {
+      console.error(`${c.red}✖ Provide error text: npx omniguild --explain "TypeError: ..."${c.reset}`);
+      process.exit(1);
+    }
+  }
+  const result = explainError(errorText, process.cwd());
+  console.log(result.explanation);
+  process.exit(0);
+}
+
+// 29. Dependency Vulnerability Scanner
+if (args.includes('--scan-deps') || args[0] === 'scan-deps') {
+  const result = runDepScan(process.cwd());
+  console.log(result.report);
+  process.exit(0);
+}
+
+// 30. SBOM Generator
+if (args.includes('--sbom') || args[0] === 'sbom') {
+  const outputIdx = args.indexOf('--output') !== -1 ? args.indexOf('--output') + 1 : -1;
+  const output = outputIdx !== -1 && args[outputIdx] ? args[outputIdx] : null;
+  const format = args.includes('--json') ? 'json' : 'markdown';
+  const result = generateSbom(process.cwd(), { output });
+  if (format === 'json') {
+    console.log(result.json);
+  } else {
+    console.log(result.report);
+  }
+  if (output) console.log(`\n${c.green}✔ SBOM saved to: ${c.bold}${output}${c.reset}`);
+  process.exit(0);
+}
+
+// 31. Codemod/Migration Engine
+if (args.includes('--migrate') || args[0] === 'migrate') {
+  const transformIdx = args.indexOf('--migrate') !== -1 ? args.indexOf('--migrate') + 1 : 1;
+  const transformId = args[transformIdx] && !args[transformIdx].startsWith('-') ? args[transformIdx] : null;
+  if (!transformId || args.includes('--list')) {
+    const transforms = listTransforms(process.cwd());
+    console.log('# 🧬 Available Transforms\n');
+    for (const t of transforms) {
+      const tag = t.isCustom ? ' (custom)' : '';
+      console.log(`  ${c.bold}${t.id}${c.reset}${tag}: ${t.description}`);
+    }
+    process.exit(0);
+  }
+  const dryRun = args.includes('--dry-run');
+  const result = runMigration(process.cwd(), transformId, { dryRun });
+  console.log(result.report);
+  process.exit(0);
+}
+
+// 32. Secrets Vault
+if (args.includes('--vault') || args[0] === 'vault') {
+  const opIdx = args.indexOf('--vault') !== -1 ? args.indexOf('--vault') + 1 : 1;
+  const operation = args[opIdx] && !args[opIdx].startsWith('-') ? args[opIdx] : 'encrypt';
+  const passIdx = args.indexOf('--pass') !== -1 ? args.indexOf('--pass') + 1 : -1;
+  const passphrase = passIdx !== -1 && args[passIdx] ? args[passIdx] : process.env.OMNIGUILD_VAULT_KEY || '';
+  if (!passphrase) {
+    console.error(`${c.red}✖ Passphrase required: --pass <passphrase> or set OMNIGUILD_VAULT_KEY env var${c.reset}`);
+    process.exit(1);
+  }
+  const newPassIdx = args.indexOf('--new-pass') !== -1 ? args.indexOf('--new-pass') + 1 : -1;
+  const newPassphrase = newPassIdx !== -1 ? args[newPassIdx] : undefined;
+  const result = runVault(process.cwd(), operation, passphrase, { newPassphrase });
+  console.log(result.report);
+  process.exit(result.success ? 0 : 1);
+}
+
+// 33. Git Bisect Automator & Regression Finder
+if (args.includes('--bisect') || args[0] === 'bisect') {
+  const testCmdIdx = args.indexOf('--bisect') !== -1 ? args.indexOf('--bisect') + 1 : 1;
+  const testCommand = args[testCmdIdx] && !args[testCmdIdx].startsWith('-') ? args[testCmdIdx] : 'npm test';
+  const goodIdx = args.indexOf('--good') !== -1 ? args.indexOf('--good') + 1 : -1;
+  const goodCommit = goodIdx !== -1 && args[goodIdx] ? args[goodIdx] : undefined;
+  const result = findRegression(process.cwd(), testCommand, { goodCommit });
+  console.log(result.report);
+  process.exit(result.success ? 0 : 1);
+}
+
+// 34. API Mock Server Generator
+if (args.includes('--mock-api') || args[0] === 'mock-api') {
+  const portIdx = args.indexOf('--port') !== -1 ? args.indexOf('--port') + 1 : -1;
+  const port = portIdx !== -1 && args[portIdx] ? parseInt(args[portIdx], 10) : 4322;
+  const result = runMockApi(process.cwd(), { port, start: true });
+  console.log(result.report);
+  if (result.start) {
+    result.start().then(msg => {
+      console.log(`\n${c.green}🧪 ${msg}${c.reset}`);
+      console.log(`${c.dim}Press Ctrl+C to stop the mock server.${c.reset}\n`);
+    }).catch(err => {
+      console.error(`${c.red}✖ Failed to start mock server: ${err.message}${c.reset}`);
+      process.exit(1);
+    });
+  } else {
+    process.exit(0);
+  }
+  return;
+}
+
+// 35. Project Pulse Health Dashboard
+if (args.includes('--pulse') || args[0] === 'pulse') {
+  const result = runProjectPulse(process.cwd());
+  console.log(result.report);
+  process.exit(0);
+}
+
+// Autonomous Devin/OpenHands Agent Loop
+if (args[0] === 'run' || args.includes('--agent')) {
+  const goalIdx = args[0] === 'run' ? 1 : args.indexOf('--agent') + 1;
+  const goal = args.slice(goalIdx).filter(a => !a.startsWith('-')).join(' ') || 'General autonomous engineering task';
+  const dryRun = args.includes('--dry-run');
+  const res = runAutonomousAgent(goal, { cwd: process.cwd(), dryRun });
+  console.log(res.markdown);
+  process.exit(res.success ? 0 : 1);
+}
+
+// AST Automated Test Suite Synthesizer
+if (args.includes('--gen-tests') || args[0] === 'gen-tests') {
+  const fileIdx = args.indexOf('--gen-tests') !== -1 ? args.indexOf('--gen-tests') + 1 : 1;
+  const targetFile = args[fileIdx] && !args[fileIdx].startsWith('-') ? args[fileIdx] : null;
+  if (!targetFile) {
+    console.error(`${c.red}✖ Missing target source file for --gen-tests.${c.reset}`);
+    console.error('  Usage: npx omniguild --gen-tests lib/auth.js [--write]');
+    process.exit(1);
+  }
+  const shouldWrite = args.includes('--write') || !args.includes('--dry-run');
+  const res = synthesizeTestSuite(targetFile, { cwd: process.cwd(), write: shouldWrite });
+  console.log(res.testCode);
+  if (res.written) {
+    console.log(`\n${c.green}✔ [Synthesized]${c.reset} Test suite written to: ${c.bold}${res.targetTestPath}${c.reset}`);
+  }
+  process.exit(0);
+}
+
+// Living Architecture & Documentation Architect
+if (args.includes('--docs') || args[0] === 'docs') {
+  const shouldWrite = args.includes('--write') || !args.includes('--dry-run');
+  const res = generateArchitectureDocs(process.cwd(), { write: shouldWrite });
+  console.log(res.markdown);
+  if (res.written) {
+    console.log(`\n${c.green}✔ [Synthesized]${c.reset} Architecture documentation written to: ${c.bold}${res.outputPath}${c.reset}`);
+  }
+  process.exit(0);
+}
+
+// Git Semantic Changelog & Release Notes Architect
+if (args.includes('--changelog') || args[0] === 'changelog') {
+  const verIdx = args.indexOf('--ver') !== -1 ? args.indexOf('--ver') + 1 : -1;
+  const version = verIdx !== -1 && args[verIdx] ? args[verIdx] : `v${VERSION}`;
+  const shouldWrite = args.includes('--write') || !args.includes('--dry-run');
+  const res = generateChangelog(process.cwd(), { version, write: shouldWrite });
+  console.log(res.markdown);
+  if (res.written) {
+    console.log(`\n${c.green}✔ [Synthesized]${c.reset} Changelog written to: ${c.bold}${res.outputPath}${c.reset}`);
+  }
+  process.exit(0);
+}
+
+// Zero-Dependency LAN/VPN Team Brain Sync Server
+if (args.includes('--serve') || args[0] === 'serve') {
+  const portIdx = args.indexOf('--port') !== -1 ? args.indexOf('--port') + 1 : -1;
+  const port = portIdx !== -1 && args[portIdx] ? parseInt(args[portIdx], 10) : 4545;
+  startSyncServer({ port, cwd: process.cwd() }).then(srv => {
+    console.log(`\n${c.green}🌐 [OmniGuild Brain Sync Server Running]${c.reset} ${c.bold}${srv.url}${c.reset}`);
+    console.log(`${c.dim}Teammates can sync using: ${c.bold}npx omniguild --sync-team ${srv.url}${c.reset}`);
+    console.log(`${c.dim}Press Ctrl+C to stop server.${c.reset}\n`);
+  }).catch(err => {
+    console.error(`${c.red}✖ Failed to start sync server: ${err.message}${c.reset}`);
+    process.exit(1);
+  });
+  return;
+}
+
+// Sync From Remote Team Brain
+if (args.includes('--sync-team')) {
+  const urlIdx = args.indexOf('--sync-team') + 1;
+  const remoteUrl = args[urlIdx] && !args[urlIdx].startsWith('-') ? args[urlIdx] : null;
+  if (!remoteUrl) {
+    console.error(`${c.red}✖ Missing remote URL for --sync-team.${c.reset}`);
+    console.error('  Usage: npx omniguild --sync-team http://192.168.1.50:4545');
+    process.exit(1);
+  }
+  pullFromRemote(remoteUrl, { cwd: process.cwd() }).then(res => {
+    console.log(`${c.green}✔ [Team Brain Synced]${c.reset} Merged ${res.globalCount} global documents and ${res.teamCount} team documents.`);
+    process.exit(0);
+  }).catch(err => {
+    console.error(`${c.red}✖ Sync failed: ${err.message}${c.reset}`);
+    process.exit(1);
+  });
+  return;
+}
+
+// Push To Remote Team Brain
+if (args.includes('--push-team')) {
+  const urlIdx = args.indexOf('--push-team') + 1;
+  const remoteUrl = args[urlIdx] && !args[urlIdx].startsWith('-') ? args[urlIdx] : null;
+  if (!remoteUrl) {
+    console.error(`${c.red}✖ Missing remote URL for --push-team.${c.reset}`);
+    console.error('  Usage: npx omniguild --push-team http://192.168.1.50:4545');
+    process.exit(1);
+  }
+  pushToRemote(remoteUrl, { cwd: process.cwd() }).then(res => {
+    console.log(`${c.green}✔ [Team Brain Pushed]${c.reset} Memory uploaded to remote team hub.`);
+    process.exit(0);
+  }).catch(err => {
+    console.error(`${c.red}✖ Push failed: ${err.message}${c.reset}`);
+    process.exit(1);
+  });
+  return;
+}
 
 // 1. Interactive Terminal HUD (Apple-Grade TUI)
 if (args.includes('--ui') || args.includes('-u') || args[0] === 'ui') {

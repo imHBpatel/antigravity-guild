@@ -1,8 +1,8 @@
 # ⚡ OmniGuild (`antigravity-guild` / `omniguild`)
 
-> **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with BM25 probabilistic memory, AST repo-mapping, living memory bank, Letta OS memory paging, Cognee knowledge graph, SWE-agent bug reproducers, Aider surgical diffs, smart @ context expansion, MetaGPT review SOPs, Repomix context packaging, local web dashboard, terminal HUD, self-healing tests, and deterministic invariants.**
+> **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with an Autonomous Devin Agent Loop, AST Test Suite Synthesizer, Living Architecture Docs, Semantic Changelog Architect, LAN Team Brain Sync, BM25 probabilistic memory, AST repo-mapping, living memory bank, Letta OS memory paging, Cognee knowledge graph, SWE-agent bug reproducers, Aider surgical diffs, smart @ context expansion, MetaGPT review SOPs, Repomix context packaging, local web dashboard, terminal HUD, self-healing tests, and deterministic invariants.**
 
-[![Version](https://img.shields.io/badge/version-3.2.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-4.0.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
@@ -446,10 +446,14 @@ graph TD
 
 ## 🌐 Model Context Protocol (MCP) Server
 
-OmniGuild Sovereign exposes **16 native MCP tools** — 1 dedicated superpower for each of the 16 Council Minds:
+OmniGuild Sovereign exposes **20 native MCP tools** — complete engineering coverage across every Council Mind:
 
 | MCP Tool | Council Mind | What It Does for the AI |
 |:---|:---|:---|
+| `openguild_run_agent` | 🔬 Principal AGI Scientist | Executes Devin/OpenHands-style autonomous Plan-Act-Verify engineering loop |
+| `openguild_generate_tests` | 🧪 Principal QA Lead | Synthesizes full AST unit, boundary, and edge-case test suites for source files |
+| `openguild_generate_docs` | 🧠 Chief Software Architect | Synthesizes living architecture documentation with Mermaid system topology |
+| `openguild_generate_changelog`| 💼 Product Strategy Lead | Synthesizes KeepAChangelog semantic release notes from git history |
 | `openguild_search_memory` | 📊 Knowledge Graph Architect | Probabilistic BM25 Okapi search ranking the most relevant architectural rules & lessons |
 | `openguild_resolve_memory_conflicts` | 🧬 Self-Healing Specialist | Audits memory vaults and auto-annotates superseded rules to eliminate hallucinations |
 | `openguild_get_repo_map` | 🧠 Chief Software Architect | Extracts a token-dense AST symbol topology across JS/TS, Python, Go, and Rust |
@@ -473,6 +477,13 @@ OmniGuild Sovereign exposes **16 native MCP tools** — 1 dedicated superpower f
 
 | Command / Flag | Purpose | Example |
 |:---|:---|:---|
+| `npx omniguild run "<goal>"` | Autonomous Devin/OpenHands-style engineering loop | `npx omniguild run "add email validation"` |
+| `npx omniguild --gen-tests <f>` | Synthesize comprehensive AST unit test suites | `npx omniguild --gen-tests lib/auth.js` |
+| `npx omniguild --docs` | Generate living architecture docs with Mermaid topology | `npx omniguild --docs` |
+| `npx omniguild --changelog` | Synthesize semantic KeepAChangelog with Council sign-offs | `npx omniguild --changelog` |
+| `npx omniguild --serve [--port]` | Start zero-dependency LAN/VPN team brain sync server | `npx omniguild --serve --port 4545` |
+| `npx omniguild --sync-team <url>` | Pull and merge team memory from remote sync server | `npx omniguild --sync-team http://host:4545` |
+| `npx omniguild --push-team <url>` | Push local team memory to remote sync server | `npx omniguild --push-team http://host:4545` |
 | `npx omniguild` | Initialize or update OmniGuild in current project | `npx omniguild` |
 | `npx omniguild -u, --ui` | Launch interactive Apple-grade terminal HUD dashboard | `npx omniguild --ui` |
 | `npx omniguild --dashboard` | Launch local zero-dependency web visualizer dashboard | `npx omniguild --dashboard` |

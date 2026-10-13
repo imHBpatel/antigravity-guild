@@ -27,3 +27,4 @@ out/
 .nx/
 .DS_Store
 Thumbs.db
+.openguild/*.json

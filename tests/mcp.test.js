@@ -11,7 +11,7 @@ console.log('🧪 Running Model Context Protocol (MCP) Server Tests...');
 // 1. Tool Schemas
 {
   assert(Array.isArray(MCP_TOOLS), 'MCP_TOOLS must be an array');
-  assert.strictEqual(MCP_TOOLS.length, 16, 'Must expose 16 MCP tools (one for each Council Mind)');
+  assert.strictEqual(MCP_TOOLS.length, 20, 'Must expose 20 MCP tools');
 
   const names = MCP_TOOLS.map(t => t.name);
   assert(names.includes('openguild_read_memory'));
@@ -30,8 +30,12 @@ console.log('🧪 Running Model Context Protocol (MCP) Server Tests...');
   assert(names.includes('openguild_resolve_memory_conflicts'));
   assert(names.includes('openguild_council_sop_review'));
   assert(names.includes('openguild_pack_context'));
+  assert(names.includes('openguild_run_agent'));
+  assert(names.includes('openguild_generate_tests'));
+  assert(names.includes('openguild_generate_docs'));
+  assert(names.includes('openguild_generate_changelog'));
 
-  console.log('  ✔ MCP Tool Schemas registered correctly (16/16 Council Tools)');
+  console.log('  ✔ MCP Tool Schemas registered correctly (20/20 Flagship Tools)');
 }
 
 // 2. Tool Invocations: openguild_read_memory
@@ -216,6 +220,52 @@ console.log('🧪 Running Model Context Protocol (MCP) Server Tests...');
   assert(packRes.content[0].text.includes('OmniGuild Codebase Context Bundle'));
 
   console.log('  ✔ openguild_pack_context verified');
+}
+
+// 15. Tool Invocations: openguild_run_agent
+{
+  const agentRes = handleToolCall('openguild_run_agent', {
+    goal: 'Test MCP Autonomous Execution',
+    dryRun: true,
+    projectPath: __dirname + '/..'
+  });
+  assert(!agentRes.isError);
+  assert(agentRes.content[0].text.includes('OmniGuild Autonomous Agent Loop'));
+  console.log('  ✔ openguild_run_agent verified');
+}
+
+// 16. Tool Invocations: openguild_generate_tests
+{
+  const testGenRes = handleToolCall('openguild_generate_tests', {
+    filePath: path.resolve(__dirname, '../lib/healer.js'),
+    write: false
+  });
+  assert(!testGenRes.isError);
+  assert(testGenRes.content[0].text.includes('Automated Test Suite'));
+  console.log('  ✔ openguild_generate_tests verified');
+}
+
+// 17. Tool Invocations: openguild_generate_docs
+{
+  const docsRes = handleToolCall('openguild_generate_docs', {
+    projectPath: __dirname + '/..',
+    write: false
+  });
+  assert(!docsRes.isError);
+  assert(docsRes.content[0].text.includes('Architecture & System Blueprint'));
+  console.log('  ✔ openguild_generate_docs verified');
+}
+
+// 18. Tool Invocations: openguild_generate_changelog
+{
+  const changelogRes = handleToolCall('openguild_generate_changelog', {
+    projectPath: __dirname + '/..',
+    version: 'v3.3.0',
+    write: false
+  });
+  assert(!changelogRes.isError);
+  assert(changelogRes.content[0].text.includes('Changelog: [v3.3.0]'));
+  console.log('  ✔ openguild_generate_changelog verified');
 }
 
 console.log('✨ All MCP Server Tests Passed!\n');
