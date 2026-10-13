@@ -2,7 +2,7 @@
 
 > **The All-In-One AI Developer Engine: Turn your AI coding assistant into a 16-person staff engineering council with an Autonomous Devin Agent Loop, AST Test Suite Synthesizer, Living Architecture Docs, Semantic Changelog Architect, LAN Team Brain Sync, BM25 probabilistic memory, AST repo-mapping, living memory bank, Letta OS memory paging, Cognee knowledge graph, SWE-agent bug reproducers, Aider surgical diffs, smart @ context expansion, MetaGPT review SOPs, Repomix context packaging, local web dashboard, terminal HUD, self-healing tests, and deterministic invariants.**
 
-[![Version](https://img.shields.io/badge/version-4.0.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-4.1.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
@@ -514,6 +514,8 @@ OmniGuild Sovereign exposes **20 native MCP tools** — complete engineering cov
 | `npx omniguild --status` | Inspect active memory files, council status, and stats | `npx omniguild --status` |
 | `npx omniguild --export-memory` | Backup memory vault to JSON file | `npx omniguild --export-memory backup.json` |
 | `npx omniguild --import-memory <file>`| Restore or merge memory vault from JSON backup | `npx omniguild --import-memory backup.json` |
+| `npx omniguild scaffold <type> <name>` | 1-Click production code & test generator (`api`, `ui`, `test`) | `npx omniguild scaffold api users` |
+| `npx omniguild do "<instruction>"` | Autonomous Natural-Language Intent Router & Pipeline | `npx omniguild do "audit security and verify tests"` |
 | `npx omniguild --install-hooks` | Install Git pre-commit invariant verification hook | `npx omniguild --install-hooks` |
 | `npx omniguild --dry-run` | Preview actions without modifying disk | `npx omniguild --dry-run` |
 

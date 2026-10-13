@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2026-10-13
+
+### Added
+- **Council 1-Click Code Scaffolder (`lib/scaffolder.js`, `scaffold <type> <name>`)**:
+  - Scaffolds zero-dependency production REST API resources (`scaffold api <name>`) with CRUD handlers, validation schemas, and self-testing invariant test suites.
+  - Scaffolds Apple-grade UI components (`scaffold ui <name>`) with dark/light mode CSS design tokens, WCAG AA accessibility, and interactive preview HTML.
+  - Scaffolds hermetic test suites (`scaffold test <file>`) for any codebase target file.
+- **Natural-Language Intent Router (`lib/intent_router.js`, `omniguild do "<instruction>"`)**:
+  - Translates conversational developer requests (e.g., `"check auth tokens, scan security, and make sure tests pass"`) into autonomous, chained Council pipelines.
+- **Test Suite Expansion**:
+  - Added `tests/scaffolder.test.js` and `tests/intent_router.test.js` (45 automated test suites with 100% deterministic passage).
+
 ## [4.0.0] - 2026-10-13
 
 ### Added

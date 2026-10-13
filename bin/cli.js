@@ -53,6 +53,8 @@ const { runVault } = require('../lib/secrets_vault');
 const { findRegression } = require('../lib/regression_finder');
 const { runMockApi } = require('../lib/mock_api_server');
 const { runProjectPulse } = require('../lib/project_pulse');
+const { runScaffold } = require('../lib/scaffolder');
+const { executeIntent } = require('../lib/intent_router');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
@@ -60,6 +62,52 @@ const { runProjectPulse } = require('../lib/project_pulse');
 const args = process.argv.slice(2);
 
 // ─── v4.0 Superpower CLI Routes ──────────────────────────────────────
+
+// 36. Council 1-Click Code Scaffolder
+if (args[0] === 'scaffold' || args.includes('--scaffold')) {
+  const scaffoldIdx = args.indexOf('--scaffold') !== -1 ? args.indexOf('--scaffold') : args.indexOf('scaffold');
+  const type = args[scaffoldIdx + 1];
+  const name = args[scaffoldIdx + 2];
+
+  if (!type || !name || type.startsWith('-') || name.startsWith('-')) {
+    console.error(`${c.red}✖ Usage: npx omniguild scaffold <api|ui|test> <name>${c.reset}`);
+    console.error(`  Examples:`);
+    console.error(`    npx omniguild scaffold api users`);
+    console.error(`    npx omniguild scaffold ui BillingModal`);
+    console.error(`    npx omniguild scaffold test lib/temporal_memory.js`);
+    process.exit(1);
+  }
+
+  try {
+    const dryRun = args.includes('--dry-run');
+    const result = runScaffold(process.cwd(), type, name, { dryRun });
+    console.log(`\n${c.bold}🏛️ OmniGuild Council Scaffolder${c.reset}`);
+    console.log(`  ${c.green}✔ ${result.summary}${c.reset}`);
+    if (result.filesWritten && result.filesWritten.length > 0) {
+      console.log(`\n${c.bold}Files Created:${c.reset}`);
+      for (const f of result.filesWritten) {
+        console.log(`  📄 ${path.relative(process.cwd(), f)}`);
+      }
+    }
+  } catch (err) {
+    console.error(`${c.red}✖ Scaffold Error: ${err.message}${c.reset}`);
+    process.exit(1);
+  }
+  process.exit(0);
+}
+
+// 37. Natural-Language Intent Router
+if (args[0] === 'do') {
+  const prompt = args.slice(1).join(' ').trim();
+  if (!prompt) {
+    console.error(`${c.red}✖ Usage: npx omniguild do "<conversational instruction>"${c.reset}`);
+    console.error(`  Example: npx omniguild do "check my auth tokens, scan security, and make sure tests pass"`);
+    process.exit(1);
+  }
+
+  const result = executeIntent(prompt, process.cwd());
+  process.exit(result.allSuccess ? 0 : 1);
+}
 
 // 26. Temporal Memory Timeline
 if (args.includes('--timeline') || args[0] === 'timeline') {
