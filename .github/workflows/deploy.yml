@@ -1,0 +1,31 @@
+name: 🚀 Production Invariant Verification & Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🛡️ Run OmniGuild SAIF 2.0 Security Audit
+        run: npx antigravity-guild --audit
+
+      - name: 🧪 Deterministic Invariant Verification
+        run: npx antigravity-guild --verify
+
+      - name: 🚀 Deploy to Production
+        if: success()
+        run: echo "✅ All Invariants Passed. Ready for deployment."

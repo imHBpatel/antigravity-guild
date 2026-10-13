@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  antigravity-guild:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: antigravity-guild_prod
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true

@@ -58,13 +58,31 @@ const { executeIntent } = require('../lib/intent_router');
 const { fuzzModule, formatFuzzReport } = require('../lib/chaos_fuzzer');
 const { benchmarkModule, formatBenchmarkReport } = require('../lib/perf_benchmarker');
 const { generateDeploySpec } = require('../lib/cloud_deployer');
+const { runTitan } = require('../lib/titan_engine');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
 // ---------------------------------------------------------------------------
 const args = process.argv.slice(2);
 
-// ─── v4.0 Superpower CLI Routes ──────────────────────────────────────
+// ─── v4.2 Titan Sovereign God-Mode Pipeline ─────────────────────────
+if (args[0] === 'titan' || args[0] === 'auto' || args[0] === 'solve') {
+  const goal = args.slice(1).filter(a => !a.startsWith('-')).join(' ').trim();
+  if (!goal) {
+    console.error(`${c.red}✖ Usage: npx omniguild titan "<goal>" [--yes]${c.reset}`);
+    console.error(`  Example: npx omniguild titan "Scaffold billing API, audit security, and verify tests" --yes`);
+    process.exit(1);
+  }
+  const dryRun = args.includes('--dry-run');
+  const yes = args.includes('-y') || args.includes('--yes') || args.includes('yes') || args.includes('go-ahead');
+  runTitan(goal, { cwd: process.cwd(), dryRun, yes }).then(result => {
+    process.exit(result.overallSuccess ? 0 : 1);
+  }).catch(err => {
+    console.error(`${c.red}✖ Titan Error: ${err.message}${c.reset}`);
+    process.exit(1);
+  });
+  return;
+}
 
 // 36. Council 1-Click Code Scaffolder
 if (args[0] === 'scaffold' || args.includes('--scaffold')) {
