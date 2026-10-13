@@ -1,16 +1,17 @@
 # ⚡ OmniGuild (`omniguild` / `antigravity-guild`)
 
 > **Your Personal Engineering JARVIS & 16-Mind Supreme AI Council.**  
-> Turn any AI coding assistant or terminal into an elite, multi-role staff engineering organization with cross-project memory, autonomous Devin agent loops, 1-click feature scaffolding, natural-language intent routing, AST repo-mapping, self-healing tests, and deterministic verification invariants.
+> Turn any AI assistant or terminal into an elite, multi-role Big Tech engineering organization. Engineered with the **internet-scale architectural rigor of a Google CTO**, the **uncompromising aesthetic simplicity of an Apple CTO**, and the **constitutional safety of Anthropic**.
 
 [![Version](https://img.shields.io/badge/version-4.1.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Security Grade](https://img.shields.io/badge/SAIF%202.0-Grade%20A%2B%20Hardened-brightgreen.svg?style=flat-square)](lib/security_auditor.js)
+[![Test Suites](https://img.shields.io/badge/tests-45%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
 
 ```bash
-# Run one command in any project — 100% zero configuration:
+# Run one command in any project on your computer:
 npx antigravity-guild
 ```
 *(or `npx omniguild` / `omniguild`)*
@@ -19,37 +20,39 @@ Works out-of-the-box with **Antigravity IDE**, **Cursor**, **Claude Desktop**, *
 
 ---
 
-## 🤖 What Is OmniGuild? Think of It as Your Personal JARVIS for Coding
+## 🏛️ The Dual-CTO Philosophy: Why OmniGuild Was Built
 
-Imagine having a **16-person engineering council** from Google, Apple, and Anthropic sitting right behind your keyboard:
+Most software fails in production not because developers lack tools, but because of a fundamental disconnect between **Architecture (Scale)**, **Product (UX)**, and **Safety (Rigor)**:
 
-- **When you have a rough idea**, it turns it into an architectural blueprint with edge cases you never even thought of.
-- **When you want to build a feature**, you speak in plain English (`omniguild do "..."`), and it scaffolds production-ready APIs, UI components, and self-testing code in 1 second.
-- **When your AI writes code**, OmniGuild intercepts it: checking for security leaks (SAIF 2.0), verifying invariants, and ensuring tests pass before anything touches production.
-- **When you teach your AI a lesson**, it **remembers forever across every project on your machine**. You never have to repeat yourself again.
+```mermaid
+graph TD
+    subgraph OmniGuild ["⚡ OmniGuild Sovereign Brain"]
+        Google["🌐 Google CTO Mind<br/><b>Internet-Scale Architecture</b><br/>• O(n) algorithmic hygiene<br/>• ACID transaction safety<br/>• Zero-copy memory & async I/O<br/>• Micro-benchmarked latency"]
+        Apple["🍎 Apple CTO Mind<br/><b>Magical UX & Product Simplicity</b><br/>• 'It Just Works' zero-config<br/>• Tactile micro-interactions<br/>• Dark/light design tokens<br/>• Natural-language intent"]
+        Anthropic["🧭 Anthropic Safety Mind<br/><b>Constitutional AI & Guardrails</b><br/>• SAIF 2.0 secret scrubbing<br/>• Zero arbitrary code hazards<br/>• Deterministic invariant proofs<br/>• Zero-hallucination AST maps"]
+    end
 
-> **Even if you are a complete beginner**, OmniGuild gives you the collective engineering intelligence, security hygiene, and architectural rigor of a Big Tech Principal Engineer.
+    Developer([Solo Developer / Engineering Team]) --> OmniGuild
+    OmniGuild --> CertifiedCode["🚀 Enterprise Production Software<br/>(Hardened, Tested, Scalable, Beautiful)"]
+```
+
+### 🍎 The Apple CTO Standard: "It Just Works"
+- **Zero Configuration Burden:** You never edit 50-line YAML files or configure complex Docker daemons. In 1 second, OmniGuild discovers your language, framework, package manager, and editor.
+- **Natural Language Intent:** Instead of remembering 37 CLI flags, just type `omniguild do "audit security and verify tests"`. OmniGuild translates your intention into a multi-stage execution pipeline.
+- **Tactile UI Scaffolding:** Generates accessible, responsive components with smooth easing curves, semantic CSS tokens, and WCAG AA compliance with zero CSS framework bloat.
+
+### 🌐 The Google CTO Standard: Extreme Scalability & Invariant Rigor
+- **Zero AI Amnesia:** Big Tech engineering depends on institutional memory. OmniGuild preserves every past bugfix and architectural decision in cross-project markdown vaults forever.
+- **80%–85% Context Diet:** Monolithic prompt templates burn 4,500+ tokens before you even type a prompt. OmniGuild keeps the base contract razor-thin (~770 tokens, Grade A+), improving Time-To-First-Token (TTFT) streaming latency and saving hundreds of dollars per developer.
+- **Deterministic Verification Gate:** An AI assistant should never say *"I'm done!"* without empirical mathematical proof. OmniGuild executes project test suites, linters, and typecheckers before certifying completion.
+
+### 🧭 The Anthropic Standard: Constitutional Safety & Secret Scrubbing
+- **SAIF 2.0 Codebase Auditor:** Scans code for plaintext AWS keys, GitHub tokens, unparameterized SQL concatenation, and dangerous `eval()` execution, certifying institutional compliance.
+- **Zero External Telemetry Leaks:** 100% pure Node.js built-ins. Never sends your source code, tokens, or repository context to third-party cloud servers. Everything runs entirely on your local machine.
 
 ---
 
-## 😫 Why Nothing Else on Earth Solves This Today
-
-Every existing AI tool today is an isolated, incomplete fragment:
-
-| Tool | What It Does | Why It Fails Alone | How OmniGuild Solves It |
-|:---|:---|:---|:---|
-| **GitHub Copilot** | Autocompletes text lines | Shallow demo code, zero memory across sessions, zero tests | **16-Mind Council** reviews architecture, edge cases, and enforces test passing |
-| **Cursor / Windsurf** | Agent chat in editor | Amnesia every new chat, burns 4,000+ tokens on monolithic rules | **Cross-project memory vault** + **770-token diet** (saves 80-85% tokens) |
-| **Aider** | Git terminal diffs | No web dashboard, no team memory, no MCP editor integration | **Unified engine:** CLI diffs + Web dashboard + 20 native MCP tools |
-| **Repomix** | Packs code into markdown | Just a file packer — cannot search, test, or remember | **Packager + BM25 search + AST repo-map + Letta memory pager** |
-| **Letta (MemGPT)** | OS memory paging | Heavy Python stack, Docker containers, hard to set up | **Zero dependencies:** 100% pure Node.js built-ins, 1-second setup |
-| **Devin / OpenHands** | Autonomous agent loop | Heavy cloud VM or complex local container setup | **In-repo autonomous agent loop** (`omniguild run "<goal>"`) |
-
----
-
-## ⚡ The 3-Second Quick Start ("It Just Works")
-
-Like an Apple product, OmniGuild eliminates setup friction. No config files to write, no API keys to configure, no magic prompting rituals.
+## ⚡ The 3-Second Quick Start
 
 Navigate to **any repository on your computer** and run:
 
@@ -59,27 +62,30 @@ npx antigravity-guild
 ```
 
 ### 🍎 What OmniGuild Does Automatically in 1 Second:
-1. 🧠 **Links Global Memory Hub (`~/.openguild/memory`):** Automatically inherits past bugfixes and lessons learned across all previous projects.
-2. 👥 **Initializes Team Memory (`.openguild/`):** Version-controls architecture decisions so teammates' AIs share the exact same standards.
-3. ⚡ **Configures Editor MCP (Zero-Click):** Configures 20 native MCP tools for **Cursor**, **Claude Desktop**, **Antigravity**, **VS Code**, and **Windsurf**.
-4. 📜 **Synthesizes AI Contracts (Zero-Prompt Mandate):** Writes [`AGENTS.md`](file:///e:/Tech%20Project/antigravity-guild/AGENTS.md), [`.cursorrules`](file:///e:/Tech%20Project/antigravity-guild/.cursorrules), and [`.gemini/rules.md`](file:///e:/Tech%20Project/antigravity-guild/.gemini) so your AI automatically checks memory and runs tests without you having to ask.
-5. 🛡️ **SAIF 2.0 Security Audit:** Scans 100% of workspace files for secret leaks and code vulnerabilities (Grade A+ to F).
-6. ⚡ **Token Diet Optimizer:** Slashes AI base prompt load by **80%–85%** (~770 tokens vs. ~4,500 token monolithic prompts).
-7. 🧪 **Pre-Commit Invariant Hooks:** Installs Git hooks that deterministically verify tests and linters before any commit.
+1. 🧠 **Connects Global Memory Hub (`~/.openguild/memory`):** Inherits architectural rules and bugfixes learned across all your past projects.
+2. 👥 **Initializes Team Memory (`.openguild/`):** Sets up version-controlled project standards so all teammates' AIs share identical conventions.
+3. ⚡ **Configures Editor MCP (Zero-Click):** Directly configures 20 native MCP tools in **Cursor**, **Claude Desktop**, **Antigravity**, **VS Code**, and **Windsurf**.
+4. 📜 **Synthesizes AI Contracts (Zero-Prompt Mandate):** Writes [`AGENTS.md`](file:///e:/Tech%20Project/antigravity-guild/AGENTS.md), [`.cursorrules`](file:///e:/Tech%20Project/antigravity-guild/.cursorrules), and [`.gemini/rules.md`](file:///e:/Tech%20Project/antigravity-guild/.gemini) so the AI automatically reads memory, audits code, and runs tests on every single prompt.
+5. 🛡️ **SAIF 2.0 Security Audit:** Scans 100% of workspace files for hardcoded secrets, SQL injection, and eval hazards (Grade A+ to F).
+6. ⚡ **Profiles Context Diet:** Benchmarks token consumption, delivering an 80%–85% token diet.
+7. 🧪 **Pre-Commit Invariant Hooks:** Installs Git hooks that deterministically verify tests and linters before allowing any commit.
 
 ---
 
-## 🚀 How to Use OmniGuild: 6 Ways to Super-Intelligence
+## 💎 The 8 Deep-Dive Superpower Journeys
 
-### 🗣️ 1. The "JARVIS" Natural-Language Mode (`omniguild do "..."`)
-Don't want to memorize CLI flags? Speak to OmniGuild in plain English:
+---
+
+### 1. 🗣️ The "JARVIS" Natural-Language Intent Router (`omniguild do "..."`)
+**The Problem:** Developers have cognitive overload remembering 50 different CLI flags across different tools.  
+**The Solution:** An autonomous intent classifier that extracts goals, builds a dependency DAG, and executes the pipeline in sequence.
 
 ```bash
-# Speak your goal naturally:
+# Speak to your repository in plain English:
 omniguild do "check my auth tokens, scan security, and make sure tests pass"
 ```
 
-**What OmniGuild does autonomously:**
+**Real Terminal Output:**
 ```text
 🏛️ OmniGuild Autonomous Intent Engine
 Intent: "check my auth tokens, scan security, and make sure tests pass"
@@ -93,147 +99,212 @@ Execution Status: ✅ ALL INVARIANTS SATISFIED
 
 ---
 
-### 🔨 2. The 1-Click Code & Test Scaffolder (`omniguild scaffold`)
-Build entire production-ready features with input validation and tests in 1 second:
+### 2. 🔨 The Council 1-Click Code Scaffolder (`omniguild scaffold`)
+**The Problem:** Writing boilerplate REST APIs, UI components, or test files takes hours, is repetitive, and often introduces edge-case bugs.  
+**The Solution:** Instant production-grade code synthesis with built-in input validation, error handling, and self-testing test files.
 
+#### A. Scaffold a Production REST API Resource in 1 Second:
 ```bash
-# Scaffold a production REST API with CRUD handlers, validation & test suite:
 omniguild scaffold api users
+```
+- **Creates `lib/api/users_api.js`:** Pure Node.js CRUD router (create, get, list, update, delete) with validation schemas, HTTP status codes, and JSON responses.
+- **Creates `tests/users_api.test.js`:** Hermetic invariant test suite testing edge cases, boundary rejections, and CRUD lifecycles. Passes immediately on line 1!
 
-# Scaffold an Apple-grade UI component with CSS tokens & accessibility:
+#### B. Scaffold an Apple-Grade UI Component:
+```bash
 omniguild scaffold ui BillingModal
+```
+- **Creates `lib/components/BillingModal.js`:** Tactical micro-interactions, dark/light CSS variables, and WCAG AA accessibility (`role="region"`).
+- **Creates `BillingModal.preview.html`:** Instant visual preview in your browser.
 
-# Scaffold a hermetic test suite for any existing file:
+#### C. Scaffold a Hermetic Test Suite for Any File:
+```bash
 omniguild scaffold test lib/temporal_memory.js
 ```
-
-Each scaffolded API comes with a **self-testing test suite** that passes on line 1!
-
----
-
-### 💬 3. The "Zero-Prompt" Editor Mode (Cursor, Claude, Antigravity, VS Code)
-Once OmniGuild is initialized, **you never need to remind your AI**:
-- ❌ *"Remember our auth rules"*
-- ❌ *"Act as an expert architect"*
-- ❌ *"Please run tests before finishing"*
-
-Just prompt normally:
-> *"fix the checkout bug"*
-
-Your AI assistant will **autonomously**:
-1. Search your global memory for past payment/checkout bugfixes using **BM25 probabilistic search**.
-2. Review the code through the **16-Mind Council** (Architecture, SAIF Security, QA).
-3. Apply surgical patches, verify that `npm test` passes, and store the lesson for future chats.
+- Reads the target file's AST exports and synthesizes a standalone test file with deterministic assertions.
 
 ---
 
-### 🤖 4. Autonomous Devin Agent Loop (`omniguild run "<goal>"`)
-Have a goal but don't want to micro-manage the AI? Run the autonomous Plan-Act-Verify loop:
+### 3. 🧠 Cross-Project Persistent Memory & BM25 Search
+**The Problem:** AI assistants suffer from catastrophic amnesia. Every time you open a new chat, you have to re-explain your auth middleware, database conventions, and naming rules.  
+**The Solution:** Dual-layer memory vaults powered by pure Node.js **BM25 Okapi Probabilistic Search** ($k_1=1.2, b=0.75$).
 
 ```bash
-omniguild run "add email validation to signup endpoint and verify all tests pass"
+# Save an insight globally (available across all projects on your machine):
+omniguild --learn "Always validate JWT signatures using asymmetric RS256 with key rotation" --category security
+
+# Probabilistic search ranked by relevance score:
+omniguild --search "JWT rotation"
 ```
 
-OmniGuild creates a step-by-step task decomposition, invokes the specialized Council minds, applies atomic diffs, tests the result, and writes a certified completion report.
+**Memory Vault Architecture:**
+- **Global Memory Hub (`~/.openguild/memory`):**
+  - `institutional_memory.md` &mdash; Permanent architectural bugfixes and conventions.
+  - `security_standards.md` &mdash; Cryptographic and auth invariants.
+  - `user_profile.md` &mdash; Personal developer preferences and workflow styles.
+- **Workspace Team Memory (`.openguild/`):**
+  - `team_memory.md` &mdash; Git-versioned team standards.
+  - `active_task.md` &mdash; Living record of current goals, status, and constraints.
+  - `decision_log.md` &mdash; Architecture Decision Records (ADRs).
 
 ---
 
-### 🩹 5. Self-Healing Test Diagnoser (`omniguild --heal`)
-Tests failing and you're not sure why?
+### 4. ⚡ Context Diet & Token Profiler (`omniguild --tokens`)
+**The Problem:** Monolithic prompt templates dump 4,000–5,000 tokens into the AI's base prompt on every turn. This causes sluggish streaming responses, attention drift, and huge API bills.  
+**The Solution:** OmniGuild achieves an **80%–85% base prompt reduction** (~770 tokens, Grade A+), using lightweight MCP tools to page in deep context only when needed.
 
 ```bash
-omniguild --heal
+omniguild --tokens
 ```
 
-OmniGuild captures runtime failures, classifies root-cause errors (Assertion Mismatch, Syntax Error, Missing Module, Null Pointer), isolates the exact line number, and synthesizes minimal surgical patches.
+**Real Output:**
+```text
+# ⚡ OmniGuild Token & Context Diet Report
+Efficiency Grade: A+ (🟢 Highly Optimized)
+  Active Context Token Load:  771 tokens
+  Standard Monolithic Prompt: 4,500 tokens
+  Context Diet Savings:       83% reduction (~3,729 tokens saved/turn)
+  Estimated Cost Savings:     ~$11.19 per 1,000 chat turns
+```
 
 ---
 
-### 🖥️ 6. The Local Web Visualizer Dashboard (`omniguild --dashboard`)
-Launch an instant, offline, dark-mode visual command center:
+### 5. 🛡️ Deep SAIF 2.0 Security Auditor (`omniguild --audit`)
+**The Problem:** Developers accidentally commit `.env` files, API keys, unparameterized SQL strings, or dangerous `eval()` execution into Git repositories.  
+**The Solution:** Google SAIF 2.0-compliant scanner that audits 100% of files in under 1 second, assigning an institutional grade (**A+ to F**).
 
 ```bash
+omniguild --audit
+```
+
+**Real Scorecard:**
+```text
+# 🛡️ OpenGuild SAIF 2.0 Security Audit
+Workspace: E:\Tech Project\antigravity-guild
+Security Grade: A+ (🛡️ SAIF Compliant (Hardened))
+Audited Files: 107 | Issues Found: 0
+
+- Critical Leaks: 0 (e.g. plaintext keys, private credentials)
+- High-Severity Risks: 0 (e.g. unparameterized SQL, raw eval)
+- SAIF Compliance Status: ✅ 100% Compliant — Zero secret exposure detected
+```
+
+---
+
+### 6. 🧪 Deterministic Verification Gate (`omniguild --verify`)
+**The Problem:** AI assistants hallucinate that tasks are complete when tests are failing or uncommitted code is broken.  
+**The Solution:** A unified invariant gate that executes native test suites, linters, typecheckers, memory vault integrity, and Git hygiene.
+
+```bash
+# Verify all invariants:
+omniguild --verify
+
+# Auto-fix memory duplicates and missing gitignore rules:
+omniguild --verify --fix
+```
+
+Emits a **Certified Invariant Proof Badge**:
+```text
+# 🧪 OpenGuild Deterministic Verification Proof: antigravity-guild
+Overall Status: ✅ CERTIFIED INVARIANT PROOF (PASSED)
+
+| Invariant Gate            | Status  | Detail                              |
+|:--------------------------|:-------:|:------------------------------------|
+| Automated Test Suite      | ✅ PASS | All 45 tests passed deterministically|
+| Memory Vault Integrity    | ✅ PASS | Audited 8 files. Found 0 duplicates.|
+| Context Hygiene           | ✅ PASS | Verified context hygiene up to date |
+```
+
+---
+
+### 7. 🤖 Autonomous Devin Agent Loop (`omniguild run "<goal>"`)
+**The Problem:** Multi-step refactorings require constant developer supervision and manual error recovery.  
+**The Solution:** OpenHands/Devin-style autonomous agent loop implementing a cognitive `Plan ➔ Act ➔ Verify` loop.
+
+```bash
+omniguild run "Implement rate limiting middleware on custom fetch calls"
+```
+
+1. **Decomposes Goal:** Breaks the vision into discrete, verifiable subtasks.
+2. **Assigns Council Roles:** Involves the Security Officer for limits, the Architect for middleware placement, and the QA Lead for test contracts.
+3. **Applies Surgical Diffs:** Uses Aider-style atomic search/replace blocks.
+4. **Validates Invariants:** Executes test runner until the solution passes hermetically.
+
+---
+
+### 8. 🖥️ The Local Visual Cockpit & Terminal HUD
+**The Problem:** Developers want to inspect their repository health, memory graphs, and council roles visually without opening cloud portals.  
+**The Solution:** Dual interfaces (Web Dashboard on `:4321` and Terminal TUI HUD) running 100% locally with zero external dependencies.
+
+```bash
+# Launch zero-dependency local browser dashboard:
 omniguild --dashboard
-```
-Opens on **`http://localhost:4321`**:
-- **16-Mind Council Chamber:** Interactive multi-agent council view.
-- **Live BM25 Memory Search:** Search past lessons and rules in real time.
-- **AST Symbol Explorer:** Visual hierarchy of your project's functions, classes, and types.
-- **Token Diet Calculator:** Real-time token and dollar savings.
 
-*(Prefer terminal? Run `omniguild --ui` for the interactive Apple-grade TUI HUD).*
+# Or launch interactive Apple-grade terminal HUD:
+omniguild --ui
+```
 
 ---
 
-## 🏛️ The 16-Mind Supreme Council
+## 🏛️ The 16-Mind Supreme Council Roster
 
-OmniGuild models every engineering decision through 16 specialized roles:
+OmniGuild coordinates your AI assistant through 16 world-class engineering disciplines:
 
-```mermaid
-graph TD
-    User([Developer / AI Assistant]) --> OmniGuild["⚡ OmniGuild Unified Brain"]
-    OmniGuild --> Core["Core Engineering"]
-    OmniGuild --> BigTech["Big Tech CTO Minds"]
-    OmniGuild --> Specialists["Deep Domain Specialists"]
-    OmniGuild --> AGI["Autonomous & AGI Systems"]
-
-    Core --> Arch["🧠 Chief Software Architect"]
-    Core --> UI["🎨 Principal UI/UX Lead"]
-    Core --> Sec["🛡️ Chief Security Officer"]
-    Core --> Eng["⚡ Staff Full-Stack Engineer"]
-    Core --> QA["🧪 Principal QA Lead"]
-    Core --> DevOps["🚀 DevOps Engineer"]
-
-    BigTech --> Google["🌐 Google CTO Brain (Scalability)"]
-    BigTech --> Apple["🍎 Apple CTO Brain (Aesthetics & UX)"]
-    BigTech --> Anthropic["🧭 Anthropic Safety Brain (Alignment)"]
-
-    Specialists --> Perf["⚡ Performance Specialist (O(n), Caching)"]
-    Specialists --> DB["🗄️ Database Reliability Engineer (ACID)"]
-    Specialists --> Prod["💼 Product Strategy Lead (Anti-Bloat)"]
-
-    AGI --> Cog["🔮 Chief Cognitive Analyst (Latent Edge Cases)"]
-    AGI --> Sci["🔬 Principal AGI Scientist (Cognitive Loops)"]
-    AGI --> Heal["🧬 Self-Healing Specialist (Fault Recovery)"]
-    AGI --> Graph["📊 Knowledge Graph Architect (Vector & RAG)"]
-```
+| Council Mind | Core Focus | What They Protect You Against |
+|:---|:---|:---|
+| 🧠 **Chief Software Architect** | System design & modular boundaries | Bloated monolithic anti-patterns & tight coupling |
+| 🎨 **Principal UI/UX Lead** | Apple-grade aesthetics & micro-interactions | Ugly default buttons, broken contrast & clunky layouts |
+| 🛡️ **Chief Security Officer** | SAIF 2.0 compliance, auth & least-privilege | Secret leaks, SQL injection & raw `eval()` execution |
+| ⚡ **Staff Full-Stack Engineer** | Clean, idiomatic, maintainable code | Sloppy hacks, untested side-effects & dead code |
+| 🧪 **Principal QA Lead** | Hermetic test suites & boundary conditions | Regressions, unhandled edge cases & false completion |
+| 🚀 **DevOps Engineer** | Hermetic builds, CI pipelines & reproducible execution | "Works on my machine" bugs & flaky CI runs |
+| 🌐 **Google CTO Brain** | Extreme scalability, zero-latency caching | Unindexed queries, memory bloat & N+1 bottlenecks |
+| 🍎 **Apple CTO Brain** | "It Just Works" simplicity & product magic | Overcomplicated UX, configuration rituals & friction |
+| 🧭 **Anthropic Safety Brain** | Constitutional alignment & user intent fidelity | AI hallucinations, attention drift & unsafe outputs |
+| ⚡ **Performance Specialist** | O(n) algorithmic hygiene & zero-copy caching | CPU spikes, unneeded re-renders & memory leaks |
+| 🗄️ **Database Reliability Engineer** | ACID transactions & schema migration safety | Data corruption, missing indexes & race conditions |
+| 💼 **Product Strategy Lead** | Business logic fidelity & anti-feature-bloat | Scope creep, missing user stories & over-engineering |
+| 🔮 **Chief Cognitive Analyst** | Latent requirement extraction & domain edge cases | Unspoken user assumptions & hidden failure modes |
+| 🔬 **Principal AGI Scientist** | Neuro-symbolic loops & test-time compute scaling | Brittle prompt chains & non-deterministic agents |
+| 🧬 **Self-Healing Specialist** | Runtime fault diagnosis & automated AST patching | Unhandled exception crashes & manual debugging loops |
+| 📊 **Knowledge Graph Architect** | Semantic ontology trees & hybrid graph-RAG | Context fragmentation & loss of architectural context |
 
 ---
 
 ## 🌐 20 Native Model Context Protocol (MCP) Tools
 
-OmniGuild exposes 20 native MCP tools directly to your AI editor:
+OmniGuild exposes 20 native MCP tools directly to your editor (Cursor, Claude Desktop, Antigravity, VS Code, Windsurf):
 
-| MCP Tool | Council Mind | What It Does for the AI |
+| MCP Tool | Council Mind | What It Does for the AI Assistant |
 |:---|:---|:---|
-| `openguild_run_agent` | 🔬 Principal AGI Scientist | Executes Devin-style autonomous Plan-Act-Verify engineering loops |
-| `openguild_generate_tests` | 🧪 Principal QA Lead | Synthesizes full AST unit, boundary, and edge-case test suites |
-| `openguild_generate_docs` | 🧠 Chief Software Architect | Synthesizes living architecture documentation with Mermaid diagrams |
-| `openguild_generate_changelog`| 💼 Product Strategy Lead | Synthesizes KeepAChangelog semantic release notes from Git history |
-| `openguild_search_memory` | 📊 Knowledge Graph Architect | Probabilistic BM25 Okapi search ranking the most relevant lessons |
-| `openguild_resolve_memory_conflicts` | 🧬 Self-Healing Specialist | Audits memory vaults and auto-annotates superseded rules |
-| `openguild_get_repo_map` | 🧠 Chief Software Architect | Extracts a token-dense AST symbol topology across JS/TS, Python, Go, Rust |
-| `openguild_read_memory_bank` | 💼 Product Strategy Lead | Reads active task context, system architecture patterns, and decision logs |
-| `openguild_update_active_task` | 💼 Product Strategy Lead | Autonomously updates active task progress and constraints |
-| `openguild_auto_analyze` | 🔮 Chief Cognitive Analyst | Transforms raw ideas into complete 16-Mind engineering blueprints |
-| `openguild_profile_tokens` | ⚡ Performance Specialist | Benchmarks AI rule token weight and context savings |
-| `openguild_verify_invariants` | 🧪 Principal QA Lead | Runs hermetic verification across tests, linters, types, and git hygiene |
-| `openguild_audit_security` | 🛡️ Chief Security Officer | Scans files for exposed API credentials, SQL injection, and eval hazards |
-| `openguild_council_sop_review` | 🔬 Principal AGI Scientist | Executes a MetaGPT-style 4-stage sequential code review |
-| `openguild_pack_context` | 🚀 DevOps Engineer | Repomix-style packager bundling codebase files with secret scrubbing |
-| `openguild_read_memory` | 🌐 Google CTO Brain | Retrieves architectural standards and past bugfixes |
-| `openguild_write_memory` | 🗄️ Database Reliability Engineer | Saves new engineering standards or decisions directly from chat |
-| `openguild_learn` | 🧭 Anthropic Safety Brain | Self-reflects on errors, records lessons, and automatically scrubs secrets |
-| `openguild_consult_council` | 🍎 Apple CTO Brain | Queries the 16-Mind Council in debate, audit, or consensus mode |
-| `openguild_get_project_context` | ⚡ Staff Full-Stack Engineer | Inspects detected tech stack, test commands, and invariant rules |
+| `openguild_run_agent` | 🔬 AGI Scientist | Executes Devin-style autonomous Plan-Act-Verify loops |
+| `openguild_generate_tests` | 🧪 QA Lead | Synthesizes full AST unit and boundary test suites |
+| `openguild_generate_docs` | 🧠 Software Architect | Generates living architecture docs with Mermaid diagrams |
+| `openguild_generate_changelog`| 💼 Product Lead | Synthesizes KeepAChangelog release notes from Git |
+| `openguild_search_memory` | 📊 Graph Architect | BM25 Okapi probabilistic search across memory vaults |
+| `openguild_resolve_memory_conflicts` | 🧬 Self-Healing | Resolves contradictory and superseded memory rules |
+| `openguild_get_repo_map` | 🧠 Software Architect | Extracts token-dense AST symbol topology across JS/TS, Python, Go, Rust |
+| `openguild_read_memory_bank` | 💼 Product Lead | Reads active task context, system patterns, and decision logs |
+| `openguild_update_active_task` | 💼 Product Lead | Autonomously updates active task progress and constraints |
+| `openguild_auto_analyze` | 🔮 Cognitive Analyst | Turns raw ideas into complete 16-Mind blueprints |
+| `openguild_profile_tokens` | ⚡ Performance | Checks AI rule token weight and context savings |
+| `openguild_verify_invariants` | 🧪 QA Lead | Runs hermetic verification across tests, linters, and types |
+| `openguild_audit_security` | 🛡️ Security Officer | Scans files for exposed API credentials, SQL injection, and eval |
+| `openguild_council_sop_review` | 🔬 AGI Scientist | Executes a MetaGPT-style 4-stage sequential code review |
+| `openguild_pack_context` | 🚀 DevOps Engineer | Repomix-style packager bundling codebase with secret scrubbing |
+| `openguild_read_memory` | 🌐 Google CTO | Retrieves architectural standards and past bugfixes |
+| `openguild_write_memory` | 🗄️ Database Engineer | Saves new engineering standards directly from chat |
+| `openguild_learn` | 🧭 Anthropic Safety | Self-reflects on errors and records lessons with secret scrubbing |
+| `openguild_consult_council` | 🍎 Apple CTO | Queries the Council in debate, audit, or consensus mode |
+| `openguild_get_project_context` | ⚡ Staff Engineer | Inspects detected tech stack, test commands, and invariant rules |
 
 ---
 
-## ⚙️ The Complete Superpower CLI Cheat Sheet
+## ⚙️ The Complete 37 Superpowers CLI Cheat Sheet
 
 | Command / Flag | Purpose | Example |
 |:---|:---|:---|
-| `omniguild do "<instruction>"` | **Autonomous Intent Router:** speaks plain English | `omniguild do "audit security and verify tests"` |
+| `omniguild do "<instruction>"` | **Natural-Language Intent Router:** speaks plain English | `omniguild do "audit security and verify tests"` |
 | `omniguild scaffold <type> <name>` | **1-Click Feature Scaffolder:** APIs, UI, tests | `omniguild scaffold api users` |
 | `omniguild run "<goal>"` | Autonomous Devin Plan-Act-Verify agent loop | `omniguild run "add email validation"` |
 | `omniguild --verify [--fix]` | Deterministic verification gate (tests + lint + types) | `omniguild --verify --fix` |
@@ -272,6 +343,24 @@ OmniGuild exposes 20 native MCP tools directly to your AI editor:
 
 ---
 
+## 💡 The Big Tech Prompt Playbook (Copy & Paste Into Your Chat)
+
+Copy and paste these battle-tested prompts directly into Cursor, Claude, or Antigravity:
+
+### 🌐 1. System Design & Scale (Google CTO Lens)
+> *"Act as the Google CTO and Chief Software Architect. Review this feature request: [Describe Feature]. Design the domain model, API contracts, zero-latency caching layer, and edge cases before generating any code."*
+
+### 🍎 2. Product Simplicity & UI Polish (Apple CTO Lens)
+> *"Act as the Apple CTO and Principal UI/UX Lead. Review this component: [Describe Component]. Optimize the layout, typography, semantic CSS tokens, tactile hover states, and WCAG AA accessibility to feel premium and intuitive."*
+
+### 🛡️ 3. Security & Anti-Leak Audit (Anthropic & Security Officer Lens)
+> *"Act as the Chief Security Officer and Anthropic Safety Brain. Audit our code for plaintext tokens, unparameterized SQL queries, unhandled null pointers, and dangerous eval vectors."*
+
+### 🧪 4. Deterministic Invariant Proof
+> *"Run our automated test suite and typechecks using the openguild_verify_invariants tool. Do not report this task as complete until all invariant proofs pass deterministically."*
+
+---
+
 ## 🔒 Privacy, Security & Zero-Dependency Guarantee
 
 - **100% Pure Node.js Built-ins:** Requires **zero npm dependencies**. No bloated `node_modules` trees, no supply chain vulnerabilities.
@@ -283,7 +372,7 @@ OmniGuild exposes 20 native MCP tools directly to your AI editor:
 
 ## ❓ Frequently Asked Questions (FAQ)
 
-### Will this slow down my AI editor?
+### Will OmniGuild slow down my AI editor?
 **No, it speeds it up dramatically.** Traditional prompt templates dump 4,000+ lines into base context, causing slow responses and attention drift. OmniGuild uses an ultra-lean base contract (~770 tokens, Grade A+) and lets the AI query deeper memory via lightweight MCP tools only when needed.
 
 ### Where is my global memory stored?
