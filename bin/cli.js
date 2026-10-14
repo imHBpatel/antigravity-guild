@@ -59,11 +59,75 @@ const { fuzzModule, formatFuzzReport } = require('../lib/chaos_fuzzer');
 const { benchmarkModule, formatBenchmarkReport } = require('../lib/perf_benchmarker');
 const { generateDeploySpec } = require('../lib/cloud_deployer');
 const { runTitan } = require('../lib/titan_engine');
+const {
+  discoverUniverse,
+  getRecoveryFlightRecorder,
+  queryUniverseSymbols,
+  auditUniverse,
+  linkUniverse,
+  formatUniverseSummary,
+  formatRecoveryReport,
+  formatAuditReport,
+} = require('../lib/universe_mesh');
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
 // ---------------------------------------------------------------------------
 const args = process.argv.slice(2);
+
+// ─── v4.3 OmniUniverse Multi-Repo Sovereign Constellation ───────────
+if (args[0] === 'universe' || args[0] === 'mesh' || args[0] === 'constellation' || args.includes('--universe')) {
+  const isRecover = args.includes('--recover') || args.includes('recover') || args.includes('--crash');
+  const isAudit = args.includes('--audit') || args.includes('audit');
+  const isLink = args.includes('--link') || args.includes('link');
+  const searchIdx = args.indexOf('--search') !== -1 ? args.indexOf('--search') : args.indexOf('search');
+
+  if (isRecover) {
+    const recorder = getRecoveryFlightRecorder({ cwd: process.cwd() });
+    console.log(formatRecoveryReport(recorder));
+    process.exit(0);
+  }
+
+  if (isAudit) {
+    const audit = auditUniverse({ cwd: process.cwd() });
+    console.log(formatAuditReport(audit));
+    process.exit(audit.universeGrade === 'F' ? 1 : 0);
+  }
+
+  if (isLink) {
+    const linked = linkUniverse({ cwd: process.cwd() });
+    console.log(`\n${c.bold}🔗 Linked ${c.green}${linked.totalLinked}${c.reset}${c.bold} repositories to OmniGuild Sovereign Constellation!${c.reset}`);
+    process.exit(0);
+  }
+
+  if (searchIdx !== -1 && args[searchIdx + 1]) {
+    const query = args[searchIdx + 1];
+    const results = queryUniverseSymbols(query, { cwd: process.cwd() });
+    console.log(`\n${c.bold}🔍 OmniUniverse Symbol & Memory Search: "${c.cyan}${query}${c.reset}${c.bold}"${c.reset}`);
+    console.log(`${c.dim}Tokens: ~${results.dietTokenEstimate} (Saved: ${results.tokenSavings} vs raw context dump)${c.reset}\n`);
+    if (results.results.length === 0) {
+      console.log(`${c.dim}No matching symbols or memory entries found across repositories.${c.reset}`);
+    } else {
+      for (const m of results.results) {
+        console.log(`  ${c.bold}${c.magenta}[${m.repo}]${c.reset} ${c.cyan}${m.file}:${m.line}${c.reset} ${c.dim}(${m.type})${c.reset}`);
+        console.log(`    ↳ ${m.signature}`);
+      }
+    }
+    console.log('');
+    process.exit(0);
+  }
+
+  // Default: Full Universe Constellation Overview
+  const universe = discoverUniverse({ cwd: process.cwd() });
+  console.log(formatUniverseSummary(universe));
+  process.exit(0);
+}
+
+if (args[0] === 'recover' || args.includes('--recover')) {
+  const recorder = getRecoveryFlightRecorder({ cwd: process.cwd() });
+  console.log(formatRecoveryReport(recorder));
+  process.exit(0);
+}
 
 // ─── v4.2 Titan Sovereign God-Mode Pipeline ─────────────────────────
 if (args[0] === 'titan' || args[0] === 'auto' || args[0] === 'solve') {

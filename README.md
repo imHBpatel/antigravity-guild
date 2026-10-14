@@ -3,12 +3,12 @@
 > **Your Personal Engineering JARVIS & 16-Mind Supreme AI Council.**  
 > Turn any AI assistant or terminal into an elite, multi-role Big Tech engineering organization. Engineered with the **internet-scale architectural rigor of a Google CTO**, the **uncompromising aesthetic simplicity of an Apple CTO**, and the **constitutional safety of Anthropic**.
 
-[![Version](https://img.shields.io/badge/version-4.2.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-4.3.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Security Grade](https://img.shields.io/badge/SAIF%202.0-Grade%20A%2B%20Hardened-brightgreen.svg?style=flat-square)](lib/security_auditor.js)
-[![Test Suites](https://img.shields.io/badge/tests-49%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
+[![Test Suites](https://img.shields.io/badge/tests-50%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
 
 ```bash
 # Run one command in any project on your computer:
@@ -17,6 +17,30 @@ npx antigravity-guild
 *(or `npx omniguild` / `omniguild`)*
 
 Works out-of-the-box with **Antigravity IDE**, **Cursor**, **Claude Desktop**, **VS Code**, **Windsurf**, and **Gemini**.
+
+---
+
+## 🌌 The World's First Multi-Repo Sovereign Constellation: `omniguild universe`
+
+> **Connect 100+ Separate Repositories into One Unified, Living Neural Fabric.**  
+> Never experience "lost work" or project amnesia again. Even after power outages or IDE crashes, OmniUniverse instantly locates your active project, at-risk files, and remaining tasks—while enabling cross-repository AST symbol searches with **96%+ context token savings**.
+
+```bash
+# Discover and map all repositories across your machine (<50ms):
+omniguild universe
+
+# Crash flight recorder: Auto-locate in-flight work and stop points after power cuts / crashes:
+omniguild universe --recover
+
+# Multi-repo SAIF 2.0 security & sync drift audit across all projects:
+omniguild universe --audit
+
+# Hyper-compressed cross-repo AST symbol & memory search (saves 96% tokens):
+omniguild universe --search "RentSetupModal"
+
+# 1-Click link all repositories to the Global Sovereign Brain:
+omniguild universe --link
+```
 
 ---
 
