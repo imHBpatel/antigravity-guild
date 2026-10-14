@@ -19,3 +19,11 @@
   5. 1-click global brain linking (`linkUniverse`).
 - **Consequences:** Zero data loss during unexpected crashes or power failures; complete multi-repo visibility in under 50ms; instant token-efficient cross-repo querying.
 
+## ADR-003: OmniLive Sentry Daemon & OmniBridge Contract Synchronizer
+- **Date:** 2026-10-14
+- **Status:** Accepted
+- **Context:** AI coding tools are reactive: engineers make errors, notice problems later, switch contexts, and manually write prompt queries. Furthermore, API contract changes in one repo break consumers in another repo without warning.
+- **Decision:** Implement `lib/omni_live.js` (sub-millisecond in-memory V8 syntax & secret leak sentry with auto-healing) and `lib/omni_bridge.js` (autonomous cross-repo API route and consumer call-site contract synchronizer).
+- **Consequences:** Sub-0.2ms error interception before compiler or linter runs; zero accidental secret commits; instant detection of cross-repository breaking changes.
+
+

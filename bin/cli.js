@@ -59,6 +59,8 @@ const { fuzzModule, formatFuzzReport } = require('../lib/chaos_fuzzer');
 const { benchmarkModule, formatBenchmarkReport } = require('../lib/perf_benchmarker');
 const { generateDeploySpec } = require('../lib/cloud_deployer');
 const { runTitan } = require('../lib/titan_engine');
+const { startLiveWatcher, formatLiveEvent } = require('../lib/omni_live');
+const { auditUniverseBridge, bridgeCompareRepos, formatBridgeReport } = require('../lib/omni_bridge');
 const {
   discoverUniverse,
   getRecoveryFlightRecorder,
@@ -74,6 +76,46 @@ const {
 // CLI Argument Parsing
 // ---------------------------------------------------------------------------
 const args = process.argv.slice(2);
+
+// ─── v4.4 OmniLive Sentry Daemon ────────────────────────────────────
+if (args[0] === 'watch' || args[0] === 'live' || args.includes('--watch')) {
+  const autoHeal = args.includes('--heal');
+  console.log(`\n${c.bold}⚡ OMNILIVE: AUTONOMOUS SUB-MILLISECOND SENTRY DAEMON${c.reset}`);
+  console.log(`${c.dim}Watching ${process.cwd()} in real time... (Sub-1ms AST validation)${c.reset}`);
+  if (autoHeal) {
+    console.log(`${c.green}✨ Autonomous self-healing enabled (--heal)${c.reset}`);
+  }
+  console.log(`${c.dim}Press Ctrl+C to stop.${c.reset}\n`);
+
+  const watcher = startLiveWatcher({
+    cwd: process.cwd(),
+    autoHeal,
+    onEvent: (ev) => {
+      console.log(formatLiveEvent(ev));
+    },
+  });
+
+  process.on('SIGINT', () => {
+    watcher.stop();
+    console.log(`\n${c.dim}OmniLive sentry stopped.${c.reset}`);
+    process.exit(0);
+  });
+  return;
+}
+
+// ─── v4.4 OmniBridge Cross-Repo Contract Synchronizer ───────────────
+if (args[0] === 'bridge' || args.includes('--bridge')) {
+  console.log(`\n${c.bold}🔀 Scanning OmniUniverse for cross-repo contract drift...${c.reset}`);
+  const bridgeRes = auditUniverseBridge({ cwd: process.cwd() });
+  if (!bridgeRes.hasBreakingChanges) {
+    console.log(`✨ ${c.green}100% Contract Harmony! All API endpoints and client calls matched across ${bridgeRes.totalReposScanned} repos.${c.reset}\n`);
+  } else {
+    for (const report of bridgeRes.driftReports) {
+      console.log(formatBridgeReport(report));
+    }
+  }
+  process.exit(0);
+}
 
 // ─── v4.3 OmniUniverse Multi-Repo Sovereign Constellation ───────────
 if (args[0] === 'universe' || args[0] === 'mesh' || args[0] === 'constellation' || args.includes('--universe')) {

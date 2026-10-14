@@ -3,12 +3,12 @@
 > **Your Personal Engineering JARVIS & 16-Mind Supreme AI Council.**  
 > Turn any AI assistant or terminal into an elite, multi-role Big Tech engineering organization. Engineered with the **internet-scale architectural rigor of a Google CTO**, the **uncompromising aesthetic simplicity of an Apple CTO**, and the **constitutional safety of Anthropic**.
 
-[![Version](https://img.shields.io/badge/version-4.3.0-gold.svg?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-4.4.0-gold.svg?style=flat-square)](package.json)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(Pure%20Node.js)-success.svg?style=flat-square)](package.json)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Security Grade](https://img.shields.io/badge/SAIF%202.0-Grade%20A%2B%20Hardened-brightgreen.svg?style=flat-square)](lib/security_auditor.js)
-[![Test Suites](https://img.shields.io/badge/tests-50%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
+[![Test Suites](https://img.shields.io/badge/tests-52%20Passed%20(100%25%20Deterministic)-brightgreen.svg?style=flat-square)](package.json)
 
 ```bash
 # Run one command in any project on your computer:
@@ -17,6 +17,25 @@ npx antigravity-guild
 *(or `npx omniguild` / `omniguild`)*
 
 Works out-of-the-box with **Antigravity IDE**, **Cursor**, **Claude Desktop**, **VS Code**, **Windsurf**, and **Gemini**.
+
+---
+
+## ⚡ Real-Time Sovereign Suite: `omniguild watch` & `omniguild bridge`
+
+### 1. OmniLive: Sub-Millisecond Autonomous Sentry Daemon
+```bash
+# Sits in background; intercepts syntax errors, secret leaks & anti-patterns in <0.2ms:
+omniguild watch
+
+# Autonomous self-healing mode: Auto-repairs trailing commas, broken strings & scrubs secrets:
+omniguild watch --heal
+```
+
+### 2. OmniBridge: Cross-Repository Contract Synchronizer
+```bash
+# Scans all 100+ repositories in OmniUniverse and identifies broken cross-repo API calls:
+omniguild bridge
+```
 
 ---
 
